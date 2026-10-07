@@ -1,0 +1,126 @@
+<!DOCTYPE html><html lang="pt-BR" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Desenvolvimento Técnico - Casa Inteligente</title>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts -->
+<link href="https://fonts.preconnect.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Montserrat:wght@800;900&amp;display=swap" rel="stylesheet">
+<!-- Custom Typography & Specific Styles -->
+<style data-purpose="typography">
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #F3EFE6;
+      color: #332738;
+      -webkit-font-smoothing: antialiased;
+    }
+    .title-headline {
+      font-family: 'Montserrat', sans-serif;
+      letter-spacing: -0.01em;
+      line-height: 1.15;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-[#926D97] selection:text-white bg-[#F3EFE6]">
+<!-- BEGIN: MainHeader -->
+<header class="w-full bg-[#E8E1D4] border-b border-[#D8CEBF] py-4 px-6 sm:px-10 lg:px-12 relative z-20">
+<div class="w-full flex items-center justify-between">
+<!-- Brand Logo Section -->
+<a aria-label="Página Inicial da Casa Inteligente" class="flex flex-col items-center group transition-transform active:scale-95" href="#">
+<svg class="w-8 h-8 text-[#482A4F]" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24">
+<path d="M3 10.5L12 3l9 7.5v9a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 19.5v-9z"></path>
+<path d="M12 14.5c0 0-2.5-1.8-3.2-2.7a2 2 0 0 1 3.2-2.3 2 2 0 0 1 3.2 2.3c-.7.9-3.2 2.7-3.2 2.7z" fill="#482A4F"></path>
+</svg>
+<span class="text-[8px] font-extrabold tracking-tight text-[#482A4F] uppercase mt-0.5">casa inteligente</span>
+</a>
+<!-- Navigation Menu Pill Bar -->
+<nav aria-label="Navegação Principal" class="hidden md:flex items-center gap-3">
+<a class="px-6 py-2 rounded-full text-white text-sm font-semibold bg-[#926D97] hover:bg-[#825c87] shadow-sm transition-all duration-200" href="{{DATA:SCREEN:SCREEN_25}}">
+        Início
+      </a>
+<a class="px-6 py-2 rounded-full text-white text-sm font-semibold bg-[#926D97] hover:bg-[#825c87] shadow-sm transition-all duration-200" href="{{DATA:SCREEN:SCREEN_21}}">
+        Projeto
+      </a>
+<a aria-current="page" class="px-7 py-2 rounded-full text-white text-sm font-bold bg-[#583560] shadow-sm transition-all duration-200" href="{{DATA:SCREEN:SCREEN_17}}">
+        Desenvolvimento
+      </a>
+<a class="px-6 py-2 rounded-full text-white text-sm font-semibold bg-[#926D97] hover:bg-[#825c87] shadow-sm transition-all duration-200" href="{{DATA:SCREEN:SCREEN_19}}">
+        Curso
+      </a>
+<a class="px-6 py-2 rounded-full text-white text-sm font-semibold bg-[#926D97] hover:bg-[#825c87] shadow-sm transition-all duration-200" href="{{DATA:SCREEN:SCREEN_3}}">
+        Referências
+      </a>
+</nav>
+<!-- Profile Avatar Button -->
+<div class="flex items-center">
+<button aria-label="Perfil do usuário" class="w-10 h-10 rounded-full bg-[#926D97] flex items-center justify-center text-white hover:bg-[#7e5b83] transition-all shadow-sm focus:outline-none focus:ring-2 focus:ring-[#482A4F] focus:ring-offset-2" type="button">
+<svg class="w-6 h-6 stroke-[1.8]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<circle cx="12" cy="8" r="4"></circle>
+<path d="M4 20c0-4 4-6.5 8-6.5s8 2.5 8 6.5"></path>
+</svg>
+</button>
+</div>
+</div>
+</header>
+<!-- END: MainHeader -->
+<!-- BEGIN: MainContent -->
+<main class="flex-grow max-w-4xl w-full mx-auto px-5 sm:px-8 py-10 sm:py-14 flex flex-col items-center justify-center">
+<!-- Section Heading -->
+<header class="text-center mb-10 sm:mb-12">
+<h1 class="title-headline text-3xl sm:text-4xl md:text-[2.75rem] font-black text-[#482A4F] uppercase tracking-normal leading-tight">REFERÊNCIAS BIBLIOGRÁFICAS</h1>
+</header>
+<!-- Technical Development Cards Container -->
+<section aria-label="Etapas de desenvolvimento do projeto" class="w-full flex flex-col gap-6 text-center">
+<!-- Stage Card 1: Contexto e Motivação -->
+<article class="bg-[#FCFAF7]/95 rounded-2xl p-7 sm:px-12 sm:py-8 border border-[#EBE3D7] shadow-[0_2px_12px_rgba(72,42,79,0.03)]" data-purpose="content-card">
+<p class="text-[#2F2232] text-sm sm:text-base leading-relaxed sm:leading-loose font-normal"></p><div class="">ANURADHA, P. et al. IoT based enabling home automation system for individuals with diverse disabilities. e-Prime –</div><div class="">&nbsp; Advances in Electrical Engineering, Electronics and Energy, [s. l.], 2023. DOI:</div><div class="">&nbsp; https://doi.org/10.1016/j.prime.2023.100366.</div><p class=""></p>
+</article>
+<!-- Stage Card 2: Metodologia e Especificação -->
+<article class="bg-[#FCFAF7]/95 rounded-2xl p-7 sm:px-12 sm:py-8 border border-[#EBE3D7] shadow-[0_2px_12px_rgba(72,42,79,0.03)]" data-purpose="content-card">
+<p class="text-[#2F2232] text-sm sm:text-base leading-relaxed sm:leading-loose font-normal">
+        &nbsp;ARDUINO. Arduino Documentation. [S. l.], 2026. Disponível em: https://docs.arduino.cc/.
+      </p>
+</article>
+<!-- Stage Card 3: Arquitetura Técnica & Hardware -->
+<article class="bg-[#FCFAF7]/95 rounded-2xl p-7 sm:px-12 sm:py-8 border border-[#EBE3D7] shadow-[0_2px_12px_rgba(72,42,79,0.03)]" data-purpose="content-card">
+<p class="text-[#2F2232] text-sm sm:text-base leading-relaxed sm:leading-loose font-normal"></p><div class="">ASSOCIAÇÃO BRASILEIRA DE NORMAS TÉCNICAS. ABNT NBR ISO 9241-11: ergonomia da interação humano-sistema: parte 11:</div><div class="">&nbsp; usabilidade: definições e conceitos. Rio de Janeiro: ABNT, 2021.</div><p class=""></p>
+</article>
+<!-- Stage Card 4: Validação, Acessibilidade e Resultados -->
+<article class="bg-[#FCFAF7]/95 rounded-2xl p-7 sm:px-12 sm:py-8 border border-[#EBE3D7] shadow-[0_2px_12px_rgba(72,42,79,0.03)]" data-purpose="content-card">
+<p class="text-[#2F2232] text-sm sm:text-base leading-relaxed sm:leading-loose font-normal">&nbsp;BANZI, Massimo; SHILOH, Michael. Primeiros passos com o Arduino. 2. ed. São Paulo: Novatec, 2015.</p>
+</article>
+<article class="bg-[#FCFAF7]/95 rounded-2xl p-7 sm:px-12 sm:py-8 border border-[#EBE3D7] shadow-[0_2px_12px_rgba(72,42,79,0.03)]" data-purpose="content-card"><p class="text-[#2F2232] text-sm sm:text-base leading-relaxed sm:leading-loose font-normal">BRASIL. Lei nº 13.146, de 6 de julho de 2015. Institui a Lei Brasileira de Inclusão da Pessoa com Deficiência (Estatuto da Pessoa com Deficiência). Brasília, DF: Presidência da República, 2015.</p></article><article class="bg-[#FCFAF7]/95 rounded-2xl p-7 sm:px-12 sm:py-8 border border-[#EBE3D7] shadow-[0_2px_12px_rgba(72,42,79,0.03)]" data-purpose="content-card"><p class="text-[#2F2232] text-sm sm:text-base leading-relaxed sm:leading-loose font-normal"></p><div class="">&nbsp;BRUNETE, A. et al. Smart assistive architecture for the integration of IoT devices, robotic systems, and multimodal</div><div class="">&nbsp; interfaces in healthcare environments. Sensors, [s. l.], v. 21, n. 6, p. 2212, 2021. DOI:</div><div class="">&nbsp; https://doi.org/10.3390/s21062212.</div><p></p></article><article class="bg-[#FCFAF7]/95 rounded-2xl p-7 sm:px-12 sm:py-8 border border-[#EBE3D7] shadow-[0_2px_12px_rgba(72,42,79,0.03)]" data-purpose="content-card"><p class="text-[#2F2232] text-sm sm:text-base leading-relaxed sm:leading-loose font-normal">CHACON, Scott; STRAUB, Ben. Pro Git. 2. ed. New York: Apress, 2014. Disponível em: https://git-scm.com/book.</p></article><article class="bg-[#FCFAF7]/95 rounded-2xl p-7 sm:px-12 sm:py-8 border border-[#EBE3D7] shadow-[0_2px_12px_rgba(72,42,79,0.03)]" data-purpose="content-card"><p class="text-[#2F2232] text-sm sm:text-base leading-relaxed sm:leading-loose font-normal">ELMASRI, Ramez; NAVATHE, Shamkant B. Sistemas de banco de dados. 6. ed. São Paulo: Pearson Addison Wesley, 2011.</p></article><article class="bg-[#FCFAF7]/95 rounded-2xl p-7 sm:px-12 sm:py-8 border border-[#EBE3D7] shadow-[0_2px_12px_rgba(72,42,79,0.03)]" data-purpose="content-card"><p class="text-[#2F2232] text-sm sm:text-base leading-relaxed sm:leading-loose font-normal"></p><div class="">ESPRESSIF SYSTEMS. ESP8266EX datasheet. [S. l.], [20--]. Disponível em:</div><div class="">&nbsp; https://www.espressif.com/sites/default/files/documentation/0a-esp8266ex_datasheet_en.pdf.</div><p></p></article><article class="bg-[#FCFAF7]/95 rounded-2xl p-7 sm:px-12 sm:py-8 border border-[#EBE3D7] shadow-[0_2px_12px_rgba(72,42,79,0.03)]" data-purpose="content-card"><p class="text-[#2F2232] text-sm sm:text-base leading-relaxed sm:leading-loose font-normal"></p><div class="">&nbsp;FIELDING, Roy Thomas. Architectural styles and the design of network-based software architectures. 2000. Tese</div><div class="">&nbsp; (Doutorado em Information and Computer Science) – University of California, Irvine, 2000.</div><p></p></article><article class="bg-[#FCFAF7]/95 rounded-2xl p-7 sm:px-12 sm:py-8 border border-[#EBE3D7] shadow-[0_2px_12px_rgba(72,42,79,0.03)]" data-purpose="content-card"><p class="text-[#2F2232] text-sm sm:text-base leading-relaxed sm:leading-loose font-normal">GITHUB. GitHub Docs. [S. l.], 2026. Disponível em: https://docs.github.com/.</p></article><article class="bg-[#FCFAF7]/95 rounded-2xl p-7 sm:px-12 sm:py-8 border border-[#EBE3D7] shadow-[0_2px_12px_rgba(72,42,79,0.03)]" data-purpose="content-card"><p class="text-[#2F2232] text-sm sm:text-base leading-relaxed sm:leading-loose font-normal">GOOGLE. Firebase Documentation. [S. l.], 2026. Disponível em: https://firebase.google.com/docs.</p></article><article class="bg-[#FCFAF7]/95 rounded-2xl p-7 sm:px-12 sm:py-8 border border-[#EBE3D7] shadow-[0_2px_12px_rgba(72,42,79,0.03)]" data-purpose="content-card"><p class="text-[#2F2232] text-sm sm:text-base leading-relaxed sm:leading-loose font-normal">&nbsp;HELLER, Eva. A psicologia das cores: como as cores afetam a emoção e a razão. São Paulo: Gustavo Gili, 2013.</p></article><article class="bg-[#FCFAF7]/95 rounded-2xl p-7 sm:px-12 sm:py-8 border border-[#EBE3D7] shadow-[0_2px_12px_rgba(72,42,79,0.03)]" data-purpose="content-card"><p class="text-[#2F2232] text-sm sm:text-base leading-relaxed sm:leading-loose font-normal"></p><div class="">&nbsp;INTERNATIONAL ORGANIZATION FOR STANDARDIZATION. ISO/IEC 25010: systems and software engineering: systems and software</div><div class="">&nbsp; quality requirements and evaluation (SQuaRE): system and software quality models. Geneva: ISO, 2011.</div><p></p></article><article class="bg-[#FCFAF7]/95 rounded-2xl p-7 sm:px-12 sm:py-8 border border-[#EBE3D7] shadow-[0_2px_12px_rgba(72,42,79,0.03)]" data-purpose="content-card"><p class="text-[#2F2232] text-sm sm:text-base leading-relaxed sm:leading-loose font-normal">MOZILLA. MDN Web Docs. [S. l.], 2026. Disponível em: https://developer.mozilla.org/pt-BR/.</p></article><article class="bg-[#FCFAF7]/95 rounded-2xl p-7 sm:px-12 sm:py-8 border border-[#EBE3D7] shadow-[0_2px_12px_rgba(72,42,79,0.03)]" data-purpose="content-card"><p class="text-[#2F2232] text-sm sm:text-base leading-relaxed sm:leading-loose font-normal">NIELSEN, Jakob. Usability engineering. San Francisco: Morgan Kaufmann, 1993.</p></article><article class="bg-[#FCFAF7]/95 rounded-2xl p-7 sm:px-12 sm:py-8 border border-[#EBE3D7] shadow-[0_2px_12px_rgba(72,42,79,0.03)]" data-purpose="content-card"><p class="text-[#2F2232] text-sm sm:text-base leading-relaxed sm:leading-loose font-normal">NORMAN, Donald A. O design do dia-a-dia. Rio de Janeiro: Rocco, 2006.</p></article><article class="bg-[#FCFAF7]/95 rounded-2xl p-7 sm:px-12 sm:py-8 border border-[#EBE3D7] shadow-[0_2px_12px_rgba(72,42,79,0.03)]" data-purpose="content-card"><p class="text-[#2F2232] text-sm sm:text-base leading-relaxed sm:leading-loose font-normal"></p><div class="">OPENJS FOUNDATION. Node.js Documentation. [S. l.], 2026a. Disponível em: https://nodejs.org/docs/latest/api/.</div><p></p></article><article class="bg-[#FCFAF7]/95 rounded-2xl p-7 sm:px-12 sm:py-8 border border-[#EBE3D7] shadow-[0_2px_12px_rgba(72,42,79,0.03)]" data-purpose="content-card"><p class="text-[#2F2232] text-sm sm:text-base leading-relaxed sm:leading-loose font-normal">&nbsp;OPENJS FOUNDATION. Express. [S. l.], 2026b. Disponível em: https://expressjs.com/.</p></article><article class="bg-[#FCFAF7]/95 rounded-2xl p-7 sm:px-12 sm:py-8 border border-[#EBE3D7] shadow-[0_2px_12px_rgba(72,42,79,0.03)]" data-purpose="content-card"><p class="text-[#2F2232] text-sm sm:text-base leading-relaxed sm:leading-loose font-normal">OPENJS FOUNDATION. Jest. [S. l.], 2026c. Disponível em: https://jestjs.io/.</p></article><article class="bg-[#FCFAF7]/95 rounded-2xl p-7 sm:px-12 sm:py-8 border border-[#EBE3D7] shadow-[0_2px_12px_rgba(72,42,79,0.03)]" data-purpose="content-card"><p class="text-[#2F2232] text-sm sm:text-base leading-relaxed sm:leading-loose font-normal"></p><div class="">PERIŠA, M. et al. Empowering people with disabilities in smart homes using predictive informing. Sensors, Basel, v.</div><div class="">&nbsp; 25, n. 1, p. 284, 2025. DOI: https://doi.org/10.3390/s25010284.</div><p></p></article><article class="bg-[#FCFAF7]/95 rounded-2xl p-7 sm:px-12 sm:py-8 border border-[#EBE3D7] shadow-[0_2px_12px_rgba(72,42,79,0.03)]" data-purpose="content-card"><p class="text-[#2F2232] text-sm sm:text-base leading-relaxed sm:leading-loose font-normal"></p><div class="">PRESSMAN, Roger S.; MAXIM, Bruce R. Engenharia de software: uma abordagem profissional. 8. ed. Porto Alegre: AMGH,</div><div class="">&nbsp; 2016.</div><p></p></article><article class="bg-[#FCFAF7]/95 rounded-2xl p-7 sm:px-12 sm:py-8 border border-[#EBE3D7] shadow-[0_2px_12px_rgba(72,42,79,0.03)]" data-purpose="content-card"><p class="text-[#2F2232] text-sm sm:text-base leading-relaxed sm:leading-loose font-normal">RAILWAY. Railway Docs. [S. l.], 2026. Disponível em: https://docs.railway.com/.</p></article><article class="bg-[#FCFAF7]/95 rounded-2xl p-7 sm:px-12 sm:py-8 border border-[#EBE3D7] shadow-[0_2px_12px_rgba(72,42,79,0.03)]" data-purpose="content-card"><p class="text-[#2F2232] text-sm sm:text-base leading-relaxed sm:leading-loose font-normal"></p><div class="">&nbsp;RAZA, A. et al. Smart assistance for disables using Bluetooth and Arduino. In: IEEE INTERNATIONAL CONFERENCE ON</div><div class="">&nbsp; ENGINEERING TECHNOLOGIES AND APPLIED SCIENCES (ICETAS), 7., 2020, Kuala Lumpur. Proceedings [...]. [S. l.]: IEEE,</div><div class="">&nbsp; 2020. p. 1-4. DOI: https://doi.org/10.1109/ICETAS51660.2020.9484245.</div><p></p></article><article class="bg-[#FCFAF7]/95 rounded-2xl p-7 sm:px-12 sm:py-8 border border-[#EBE3D7] shadow-[0_2px_12px_rgba(72,42,79,0.03)]" data-purpose="content-card"><p class="text-[#2F2232] text-sm sm:text-base leading-relaxed sm:leading-loose font-normal"></p><div class="">&nbsp;SADALAGE, Pramod J.; FOWLER, Martin. NoSQL essencial: um guia conciso para o mundo emergente da persistência</div><div class="">&nbsp; poliglota. São Paulo: Novatec, 2013.</div><p></p></article><article class="bg-[#FCFAF7]/95 rounded-2xl p-7 sm:px-12 sm:py-8 border border-[#EBE3D7] shadow-[0_2px_12px_rgba(72,42,79,0.03)]" data-purpose="content-card"><p class="text-[#2F2232] text-sm sm:text-base leading-relaxed sm:leading-loose font-normal"></p><div class="">SOMMERVILLE, Ian. Engenharia de software. 10. ed. São Paulo: Pearson Education do Brasil, 2018.</div><p></p></article><article class="bg-[#FCFAF7]/95 rounded-2xl p-7 sm:px-12 sm:py-8 border border-[#EBE3D7] shadow-[0_2px_12px_rgba(72,42,79,0.03)]" data-purpose="content-card"><p class="text-[#2F2232] text-sm sm:text-base leading-relaxed sm:leading-loose font-normal"></p><div class="">&nbsp;W3C – WORLD WIDE WEB CONSORTIUM. Web Content Accessibility Guidelines (WCAG) 2.1. [S. l.], 2018. Disponível em:</div><div class="">&nbsp; https://www.w3.org/TR/WCAG21/.</div><p></p></article><article class="bg-[#FCFAF7]/95 rounded-2xl p-7 sm:px-12 sm:py-8 border border-[#EBE3D7] shadow-[0_2px_12px_rgba(72,42,79,0.03)]" data-purpose="content-card"><p class="text-[#2F2232] text-sm sm:text-base leading-relaxed sm:leading-loose font-normal">WOKWI. Wokwi Docs. [S. l.], 2026. Disponível em: https://docs.wokwi.com/.</p></article></section>
+</main>
+<!-- END: MainContent -->
+<!-- BEGIN: MainFooter -->
+<footer class="w-full bg-[#E9E2D6] border-t border-[#DCD3C5] py-8 px-6 sm:px-12 mt-12">
+<div class="max-w-4xl mx-auto flex flex-col items-center text-center">
+<!-- Academic Project Title -->
+<h2 class="title-headline text-base sm:text-lg font-black tracking-wide text-[#482A4F] uppercase mb-4">
+      TRABALHO DE CONCLUSÃO DE CURSO: CASA INTELIGENTE
+    </h2>
+<!-- Details Grid -->
+<div class="w-full grid grid-cols-1 md:grid-cols-2 gap-y-2.5 gap-x-8 text-xs sm:text-sm font-medium text-[#482A4F]">
+<!-- Column 1: Social and Contact -->
+<div class="flex flex-col gap-1.5 md:text-center">
+<p class="tracking-wide">INSTAGRAM: <span class="font-normal text-[#5A3862]">@tcc_casainteligente</span></p>
+<p class="tracking-wide">CONTATO: <span class="font-normal text-[#5A3862]">(19) 99641-5255</span></p>
+</div>
+<!-- Column 2: Academic Info -->
+<div class="flex flex-col gap-1.5 md:text-center">
+<p class="tracking-wide">3 DESENVOLVIMENTO DE SISTEMAS AMS</p>
+<p class="tracking-wide">ETEC Pedro Ferreira Alves</p>
+</div>
+</div>
+</div>
+</footer>
+<!-- END: MainFooter -->
+
+
+
+
+
+
+</body></html>

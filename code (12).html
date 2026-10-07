@@ -1,0 +1,450 @@
+<!DOCTYPE html><html lang="pt-BR"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Login - Casa Inteligente</title>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts: Fredoka & Epilogue for the playful, bold rounded aesthetic -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700;800&amp;family=Epilogue:wght@700;800;900&amp;display=swap" rel="stylesheet">
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'canvas-bg': '#EFECE1',
+            'card-dark': '#482A4F',
+            'card-dark-deep': '#3d2343',
+            'input-bg': '#988398',
+            'btn-black': '#2E2230',
+            'btn-accent': '#967A9E',
+          },
+          fontFamily: {
+            brand: ['"Fredoka"', '"Epilogue"', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+<style data-purpose="typography">
+    body {
+      font-family: 'Fredoka', 'Epilogue', sans-serif;
+      letter-spacing: 0.04em;
+    }
+    .input-field:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.35);
+    }
+    .custom-scroll::-webkit-scrollbar {
+      width: 4px;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.25);
+      border-radius: 4px;
+    }
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-6px); }
+      40%, 80% { transform: translateX(6px); }
+    }
+    .animate-shake {
+      animation: shake 0.4s ease-in-out;
+    }
+  </style>
+</head>
+<body class="bg-canvas-bg min-h-screen w-full flex flex-col justify-center items-center relative overflow-hidden select-none m-0 p-4">
+<!-- Toast Notification Component -->
+<div class="fixed top-5 z-50 flex flex-col items-center gap-2 pointer-events-none transition-all duration-300 transform -translate-y-20 opacity-0" id="toast-container">
+<div class="pointer-events-auto flex items-center gap-3 px-5 py-3 rounded-2xl shadow-xl text-white text-xs sm:text-sm font-bold tracking-wide border border-white/20 backdrop-blur-md transition-all" id="toast-body">
+<span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" id="toast-icon"></span>
+<span id="toast-message">Notificação</span>
+</div>
+</div>
+<!-- BEGIN: HeaderBrand -->
+<!-- Floating logo indicator on the right edge matching visual design -->
+<aside class="absolute right-6 sm:right-10 md:right-16 top-1/2 -translate-y-24 md:-translate-y-20 flex flex-col items-center" data-purpose="brand-logo">
+<div class="relative w-16 h-14 flex items-center justify-center">
+<!-- House Outline SVG -->
+<svg class="w-14 h-14 text-btn-accent stroke-current" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" viewBox="0 0 48 48">
+<path d="M6 22 L24 8 L42 22 V40 A2 2 0 0 1 40 42 H10 A2 2 0 0 1 8 40 V24"></path>
+</svg>
+<!-- Heart nested in bottom right of house -->
+<svg class="w-6 h-6 text-btn-accent fill-current absolute right-0.5 bottom-0" viewBox="0 0 24 24">
+<path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path>
+</svg>
+</div>
+<span class="text-card-dark font-extrabold text-[11px] sm:text-xs tracking-tight mt-1">casa inteligente</span>
+</aside>
+<!-- END: HeaderBrand -->
+<!-- BEGIN: MainContent -->
+<main class="w-full flex justify-center items-center z-10">
+<!-- Login Card Container -->
+<div class="bg-card-dark rounded-[2.5rem] w-full max-w-[430px] p-8 sm:p-10 shadow-2xl flex flex-col items-center text-white relative transition-all duration-300" data-purpose="login-card" id="login-card">
+<!-- Card Title -->
+<h1 class="text-2xl sm:text-3xl font-extrabold text-white tracking-widest uppercase mb-6 sm:mb-8" id="card-title">
+      LOGIN
+    </h1>
+<!-- Login Form -->
+<form class="w-full flex flex-col gap-4" id="login-form" method="POST" onsubmit="handleLoginSubmit(event)">
+<!-- Field: E-mail -->
+<div class="flex flex-col gap-1.5">
+<label class="text-sm sm:text-base font-extrabold tracking-wider text-white uppercase ml-1" for="email">
+          E-MAIL:
+        </label>
+<input autocomplete="email" class="input-field w-full h-12 sm:h-13 bg-input-bg rounded-full border-none px-6 text-white placeholder-white/60 font-semibold text-base focus:ring-2 focus:ring-white/40 transition duration-150" id="email" name="email" required="" type="email">
+</div>
+<!-- Field: Senha -->
+<div class="flex flex-col gap-1.5 mt-1">
+<label class="text-sm sm:text-base font-extrabold tracking-wider text-white uppercase ml-1" for="senha">
+          SENHA:
+        </label>
+<input autocomplete="current-password" class="input-field w-full h-12 sm:h-13 bg-input-bg rounded-full border-none px-6 text-white placeholder-white/60 font-semibold text-base focus:ring-2 focus:ring-white/40 transition duration-150" id="senha" name="senha" required="" type="password">
+</div>
+<!-- Mensagem de Erro / Sucesso Inline Abaixo dos Campos -->
+<div aria-live="polite" class="min-h-[22px] flex items-center justify-center transition-all duration-200" id="form-feedback-container">
+<p class="text-xs sm:text-sm font-bold text-rose-300 text-center tracking-wide hidden" id="login-error-msg">
+          E-mail ou senha incorretos.
+        </p>
+<p class="text-xs sm:text-sm font-bold text-emerald-300 text-center tracking-wide hidden" id="login-success-msg">
+          Login realizado com sucesso! Entrando...
+        </p>
+</div>
+<!-- Submit Button: ENTRAR -->
+<div class="flex justify-center mt-1 sm:mt-2">
+<button class="bg-btn-black hover:bg-black text-white font-extrabold text-xs sm:text-sm tracking-wider uppercase px-9 py-2.5 rounded-full shadow-md hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer" data-purpose="submit-button" id="btn-entrar" type="submit">
+          ENTRAR
+        </button>
+</div>
+<!-- Register Link Section -->
+<div class="flex items-center justify-center gap-2.5 sm:gap-3 mt-5 sm:mt-7 pt-1" data-purpose="registration-prompt">
+<span class="text-xs sm:text-sm font-extrabold uppercase tracking-wide text-white whitespace-nowrap">
+          NÃO TENHO CONTA:
+        </span>
+<button class="bg-btn-accent hover:brightness-110 active:scale-95 text-white font-extrabold text-xs sm:text-sm uppercase tracking-wide px-5 py-2 rounded-2xl shadow-sm transition-all duration-150 text-center cursor-pointer" onclick="handleNavigateToRegister()" role="button" type="button">
+          CADASTRAR
+        </button>
+</div>
+</form>
+</div>
+</main>
+<!-- END: MainContent -->
+<!-- Botão no canto inferior esquerdo para Painel do Banco de Dados Local -->
+<button class="fixed bottom-4 left-4 z-40 bg-card-dark hover:bg-card-dark-deep text-white/90 hover:text-white px-3.5 py-1.5 rounded-full text-xs font-bold border border-white/10 shadow-lg flex items-center gap-2 transition-all active:scale-95 cursor-pointer" onclick="toggleDbPanel()">
+<span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+<span>casa_inteligente_db</span>
+<span class="bg-btn-accent text-white px-1.5 py-0.2 rounded-full text-[10px]" id="badge-count">1</span>
+</button>
+<!-- Drawer do Banco de Dados Local -->
+<div class="fixed inset-y-0 left-0 w-full max-w-sm bg-card-dark-deep/95 backdrop-blur-md shadow-2xl border-r border-white/10 p-5 z-50 transform -translate-x-full transition-transform duration-300 flex flex-col text-white" id="db-panel">
+<div class="flex items-center justify-between pb-3 border-b border-white/15">
+<div>
+<h2 class="text-sm font-extrabold uppercase tracking-wider text-white">Banco Local</h2>
+<p class="text-[10px] text-white/70 font-mono tracking-tight">casa_inteligente_users • LocalStorage</p>
+</div>
+<button class="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-xs text-white cursor-pointer" onclick="toggleDbPanel()">✕</button>
+</div>
+<div class="flex gap-2 my-3">
+<button class="flex-1 py-1.5 text-xs font-bold rounded-xl bg-btn-accent text-white transition" id="tab-users" onclick="switchDbTab('users')">Usuários Cadastrados</button>
+<button class="flex-1 py-1.5 text-xs font-bold rounded-xl bg-white/10 text-white/70 transition" id="tab-logins" onclick="switchDbTab('logins')">Sessão Atual</button>
+</div>
+<!-- Content List Container -->
+<div class="flex-1 overflow-y-auto custom-scroll space-y-2 pr-1 text-xs" id="db-items-container">
+<!-- Populated by JavaScript -->
+</div>
+<!-- Footer actions inside DB panel -->
+<div class="pt-3 border-t border-white/15 flex items-center justify-between">
+<button class="text-[11px] text-rose-300 hover:text-rose-200 uppercase font-extrabold tracking-wider underline cursor-pointer" onclick="resetDatabaseToDefault()">Restaurar Padrão</button>
+<button class="bg-btn-accent hover:brightness-110 text-white text-xs font-bold px-3 py-1 rounded-xl cursor-pointer" onclick="toggleDbPanel()">Fechar</button>
+</div>
+</div>
+<script>
+  // Chaves globais especificadas
+  const USERS_DB_KEY = 'casa_inteligente_users';
+  const LOGGED_USER_KEY = 'casa_inteligente_logged_user';
+
+  // URLs de navegação
+  const REGISTER_URL = 'cadastro.html'; // SCREEN_13
+  const MAIN_APP_URL = 'inicio.html';   // Início e Apresentação - Casa Inteligente (SCREEN_31)
+
+  let activeTab = 'users';
+  let toastTimer = null;
+
+  // 1. Estado Global Compartilhado:
+  // Ler os usuários da lista global compartilhada em localStorage('casa_inteligente_users') contendo { nome, email, senha }.
+  // Se não existir, inicializar com { nome: 'Maria da Silva', email: 'exemplo@email.com', senha: '123' }.
+  function getUsersDB() {
+    try {
+      const data = localStorage.getItem(USERS_DB_KEY);
+      if (data) {
+        const parsed = JSON.parse(data);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          return parsed;
+        }
+      }
+    } catch (e) {
+      console.error("Erro ao ler casa_inteligente_users:", e);
+    }
+
+    const defaultUsers = [
+      {
+        nome: 'Maria da Silva',
+        email: 'exemplo@email.com',
+        senha: '123'
+      }
+    ];
+    saveUsersDB(defaultUsers);
+    return defaultUsers;
+  }
+
+  function saveUsersDB(users) {
+    try {
+      localStorage.setItem(USERS_DB_KEY, JSON.stringify(users));
+      updateBadgeCount();
+      renderDbData();
+    } catch (e) {
+      console.error("Erro ao salvar casa_inteligente_users:", e);
+    }
+  }
+
+  function getLoggedUser() {
+    try {
+      const logged = localStorage.getItem(LOGGED_USER_KEY);
+      return logged ? JSON.parse(logged) : null;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function showToast(message, type = 'success') {
+    const container = document.getElementById('toast-container');
+    const toastBody = document.getElementById('toast-body');
+    const toastMsg = document.getElementById('toast-message');
+    const toastIcon = document.getElementById('toast-icon');
+
+    toastMsg.textContent = message;
+
+    if (type === 'success') {
+      toastBody.className = "pointer-events-auto flex items-center gap-3 px-5 py-3 rounded-2xl shadow-xl text-white text-xs sm:text-sm font-bold tracking-wide border border-emerald-400/40 bg-emerald-950/95 backdrop-blur-md";
+      toastIcon.className = "w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse";
+    } else {
+      toastBody.className = "pointer-events-auto flex items-center gap-3 px-5 py-3 rounded-2xl shadow-xl text-white text-xs sm:text-sm font-bold tracking-wide border border-rose-400/40 bg-rose-950/95 backdrop-blur-md";
+      toastIcon.className = "w-2.5 h-2.5 rounded-full bg-rose-400";
+    }
+
+    container.classList.remove('-translate-y-20', 'opacity-0');
+    container.classList.add('translate-y-0', 'opacity-100');
+
+    if (toastTimer) clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => {
+      container.classList.remove('translate-y-0', 'opacity-100');
+      container.classList.add('-translate-y-20', 'opacity-0');
+    }, 3500);
+  }
+
+  // 2. Ação no botão "ENTRAR" (botão principal de submissão do Login)
+  function handleLoginSubmit(event) {
+    event.preventDefault();
+    hideInlineFeedback();
+
+    const emailInput = document.getElementById('email');
+    const senhaInput = document.getElementById('senha');
+    const emailVal = emailInput.value.trim().toLowerCase();
+    const senhaVal = senhaInput.value;
+
+    const users = getUsersDB();
+
+    // Comparar e-mail sem distinção de maiúsculas/minúsculas e senha exata
+    const matchedUser = users.find(u => {
+      const uEmail = (u.email || '').trim().toLowerCase();
+      const uSenha = String(u.senha !== undefined ? u.senha : (u.senhaHash || ''));
+      return uEmail === emailVal && uSenha === senhaVal;
+    });
+
+    if (matchedUser) {
+      // SE correspondente:
+      // - Salvar sessão em localStorage('casa_inteligente_logged_user', JSON.stringify(usuario))
+      const sessionUser = {
+        nome: matchedUser.nome || 'Maria da Silva',
+        email: matchedUser.email,
+        dataLogin: new Date().toISOString()
+      };
+      localStorage.setItem(LOGGED_USER_KEY, JSON.stringify(sessionUser));
+
+      // - Exibir feedback visual de sucesso ("Login realizado com sucesso! Entrando...")
+      showInlineSuccess("Login realizado com sucesso! Entrando...");
+      showToast(`Login realizado com sucesso! Bem-vindo(a), ${sessionUser.nome}!`, 'success');
+
+      // Desabilitar botão para evitar reenvios
+      const submitBtn = document.getElementById('btn-entrar');
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.classList.add('opacity-70');
+      }
+
+      // - Redirecionar para a tela principal "Início e Apresentação - Casa Inteligente" (ou SCREEN_31)
+      setTimeout(() => {
+        navigateToScreen(MAIN_APP_URL, 'SCREEN_31');
+      }, 1100);
+
+    } else {
+      // SE não existir OU a senha estiver incorreta:
+      // - Bloquear navegação e exibir erro bem visível: "E-mail ou senha incorretos." abaixo dos campos
+      showInlineError("E-mail ou senha incorretos.");
+      shakeCard();
+      showToast("E-mail ou senha incorretos.", 'error');
+    }
+  }
+
+  function showInlineError(message) {
+    const errorMsg = document.getElementById('login-error-msg');
+    const successMsg = document.getElementById('login-success-msg');
+    successMsg.classList.add('hidden');
+    errorMsg.textContent = message;
+    errorMsg.classList.remove('hidden');
+  }
+
+  function showInlineSuccess(message) {
+    const errorMsg = document.getElementById('login-error-msg');
+    const successMsg = document.getElementById('login-success-msg');
+    errorMsg.classList.add('hidden');
+    successMsg.textContent = message;
+    successMsg.classList.remove('hidden');
+  }
+
+  function hideInlineFeedback() {
+    const errorMsg = document.getElementById('login-error-msg');
+    const successMsg = document.getElementById('login-success-msg');
+    errorMsg.classList.add('hidden');
+    successMsg.classList.add('hidden');
+  }
+
+  function shakeCard() {
+    const card = document.getElementById('login-card');
+    card.classList.remove('animate-shake');
+    // Force reflow
+    void card.offsetWidth;
+    card.classList.add('animate-shake');
+    setTimeout(() => card.classList.remove('animate-shake'), 450);
+  }
+
+  // Redirecionamento unificado compatível com ambientes SPA / protótipo
+  function navigateToScreen(url, screenTarget) {
+    if (window.parent && window.parent !== window) {
+      window.parent.postMessage({ type: 'NAVIGATE', target: screenTarget, url: url }, '*');
+    }
+    // Tentativa direta de navegação por arquivo/rota
+    try {
+      window.location.href = url;
+    } catch (e) {
+      console.log(`Navegando para ${screenTarget} / ${url}`);
+    }
+  }
+
+  // Botão "NÃO TENHO CONTA: CADASTRAR"
+  function handleNavigateToRegister() {
+    navigateToScreen(REGISTER_URL, 'SCREEN_13');
+  }
+
+  // Painel lateral e inspeção do banco de dados
+  function toggleDbPanel() {
+    const panel = document.getElementById('db-panel');
+    panel.classList.toggle('-translate-x-full');
+  }
+
+  function switchDbTab(tab) {
+    activeTab = tab;
+    const tabLogins = document.getElementById('tab-logins');
+    const tabUsers = document.getElementById('tab-users');
+
+    if (tab === 'logins') {
+      tabLogins.className = 'flex-1 py-1.5 text-xs font-bold rounded-xl bg-btn-accent text-white transition';
+      tabUsers.className = 'flex-1 py-1.5 text-xs font-bold rounded-xl bg-white/10 text-white/70 transition';
+    } else {
+      tabUsers.className = 'flex-1 py-1.5 text-xs font-bold rounded-xl bg-btn-accent text-white transition';
+      tabLogins.className = 'flex-1 py-1.5 text-xs font-bold rounded-xl bg-white/10 text-white/70 transition';
+    }
+    renderDbData();
+  }
+
+  function renderDbData() {
+    const container = document.getElementById('db-items-container');
+    const users = getUsersDB();
+    const logged = getLoggedUser();
+
+    if (activeTab === 'logins') {
+      if (!logged) {
+        container.innerHTML = `<div class="text-white/50 text-center py-6">Nenhum usuário logado no momento.<br/>Preencha o formulário para entrar!</div>`;
+        return;
+      }
+      container.innerHTML = `
+        <div class="bg-black/25 p-3 rounded-2xl border border-white/10 flex flex-col gap-1.5">
+          <div class="flex justify-between items-center">
+            <span class="font-bold text-white text-sm">${logged.nome}</span>
+            <span class="px-2 py-0.5 rounded-full text-[9px] uppercase font-extrabold bg-emerald-500/20 text-emerald-300">Conectado</span>
+          </div>
+          <div class="text-[11px] text-white/80">${logged.email}</div>
+          <div class="text-[9px] text-white/40 pt-1 border-t border-white/10">Sessão: casa_inteligente_logged_user</div>
+        </div>
+      `;
+    } else {
+      if (!users || users.length === 0) {
+        container.innerHTML = `<div class="text-white/50 text-center py-6">Nenhum usuário em casa_inteligente_users.</div>`;
+        return;
+      }
+      container.innerHTML = users.map((u, i) => `
+        <div class="bg-black/25 p-3 rounded-2xl border border-white/10 flex flex-col gap-1 hover:bg-black/35 transition cursor-pointer" onclick="fillLoginForm('${u.email}', '${u.senha || ''}')" title="Clique para preencher no formulário">
+          <div class="flex justify-between items-center">
+            <span class="font-bold text-white truncate text-xs">${u.nome || 'Sem Nome'}</span>
+            <span class="text-[9px] bg-white/15 px-2 py-0.5 rounded font-mono text-purple-200">senha: ${u.senha || ''}</span>
+          </div>
+          <div class="text-[11px] text-white/70 truncate">${u.email}</div>
+          <div class="text-[9px] text-purple-200/60 pt-0.5">Toque para preencher rápido ↗</div>
+        </div>
+      `).join('');
+    }
+  }
+
+  function fillLoginForm(email, senha) {
+    document.getElementById('email').value = email;
+    document.getElementById('senha').value = senha;
+    toggleDbPanel();
+    hideInlineFeedback();
+    showToast(`Campos preenchidos com ${email}`, 'success');
+  }
+
+  function resetDatabaseToDefault() {
+    if (confirm('Deseja redefinir o banco com o usuário padrão Maria da Silva?')) {
+      const defaultUsers = [
+        { nome: 'Maria da Silva', email: 'exemplo@email.com', senha: '123' }
+      ];
+      localStorage.setItem(USERS_DB_KEY, JSON.stringify(defaultUsers));
+      localStorage.removeItem(LOGGED_USER_KEY);
+      updateBadgeCount();
+      renderDbData();
+      showToast('Banco restaurado com usuário padrão!', 'success');
+    }
+  }
+
+  function updateBadgeCount() {
+    const users = getUsersDB();
+    const badge = document.getElementById('badge-count');
+    if (badge) {
+      badge.textContent = users.length;
+    }
+  }
+
+  // Inicialização
+  window.addEventListener('DOMContentLoaded', () => {
+    getUsersDB();
+    updateBadgeCount();
+    renderDbData();
+    
+    // Auto-preencher email se estiver cadastrado recentemente
+    const logged = getLoggedUser();
+    if (logged && logged.email) {
+      document.getElementById('email').value = logged.email;
+    }
+  });
+</script>
+</body></html>

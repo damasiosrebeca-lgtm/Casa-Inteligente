@@ -1,0 +1,262 @@
+<!DOCTYPE html><html lang="pt-BR" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Casa Inteligente - Arquitetura e Projeto</title>
+<!-- Tailwind CSS CDN with forms and container queries plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts for retro/rounded display and clean body typography -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&amp;family=Montserrat:wght@400;500;600;700&amp;family=Playfair+Display:ital,wght@1,600&amp;display=swap" rel="stylesheet">
+<!-- Custom configuration for Tailwind colors & fonts -->
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              bg: '#F2EFE9',
+              dark: '#3A2042',
+              purple: '#482A4F',
+              accent: '#91799B',
+              cardBg: '#E9E4DC',
+              btnPill: '#8F739A',
+              activePill: '#6E4E7A'
+            }
+          },
+          fontFamily: {
+            display: ['"Fredoka"', 'sans-serif'],
+            body: ['"Montserrat"', 'sans-serif'],
+            serifScript: ['"Playfair Display"', 'serif']
+          }
+        }
+      }
+    }
+  </script>
+<!-- BEGIN: Custom Styles -->
+<style data-purpose="custom-decorations">
+    /* Subtle background and rounded header/footer curves */
+    body {
+      background-color: #F3EFE6;
+      color: #3B2342;
+    }
+    .header-bar {
+      border-bottom-left-radius: 2rem;
+      border-bottom-right-radius: 2rem;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+    }
+    .footer-bar {
+      border-top-left-radius: 2.5rem;
+      border-top-right-radius: 2.5rem;
+      box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.05);
+    }
+    .video-card-shadow {
+      box-shadow: 0 10px 25px -5px rgba(58, 32, 66, 0.25);
+    }
+  </style>
+<!-- END: Custom Styles -->
+</head>
+<body class="font-body text-gray-800 antialiased min-h-screen flex flex-col justify-between selection:bg-[#91799B] selection:text-white">
+<!-- BEGIN: MainHeader -->
+<header class="header-bar bg-[#E8E2D8] px-4 sm:px-8 py-3.5 mb-8" data-purpose="site-navigation-header">
+<div class="max-w-6xl mx-auto flex items-center justify-between">
+<!-- Brand Logo / Monogram -->
+<a aria-label="Casa Inteligente Home" class="flex items-center gap-2 group focus:outline-none" href="{{DATA:SCREEN:SCREEN_25}}">
+<div class="w-11 h-11 flex flex-col items-center justify-center text-[#55385E]">
+<!-- Stylized House icon with inner heart -->
+<svg class="w-9 h-9" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24">
+<path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+<path d="M12 11.5a1.8 1.8 0 0 0-2.5 0 1.8 1.8 0 0 0 0 2.5L12 16.5l2.5-2.5a1.8 1.8 0 0 0 0-2.5 1.8 1.8 0 0 0-2.5 0z" fill="currentColor" stroke="none"></path>
+</svg>
+<span class="text-[9px] font-bold tracking-tight text-[#482A4F] -mt-1 leading-tight">casa inteligente</span>
+</div>
+</a>
+<!-- Pill Nav Menu -->
+<nav aria-label="Navegação Principal" class="hidden md:flex items-center gap-3 lg:gap-4 text-xs font-semibold text-white tracking-wide"><a class="px-5 py-2 rounded-full bg-[#957B9E] hover:bg-[#83688C] transition-colors shadow-sm cursor-pointer" href="{{DATA:SCREEN:SCREEN_25}}">Início</a>
+<a aria-current="page" class="px-5 py-2 rounded-full bg-[#62406B] ring-2 ring-[#482A4F] text-white shadow transition-colors cursor-pointer" href="{{DATA:SCREEN:SCREEN_21}}">Projeto</a>
+<a class="px-5 py-2 rounded-full bg-[#957B9E] hover:bg-[#83688C] transition-colors shadow-sm cursor-pointer" href="{{DATA:SCREEN:SCREEN_17}}">Desenvolvimento</a>
+<a class="px-5 py-2 rounded-full bg-[#957B9E] hover:bg-[#83688C] transition-colors shadow-sm cursor-pointer" href="{{DATA:SCREEN:SCREEN_19}}">Curso</a>
+<a class="px-5 py-2 rounded-full bg-[#957B9E] hover:bg-[#83688C] transition-colors shadow-sm cursor-pointer" href="{{DATA:SCREEN:SCREEN_3}}">Referências</a></nav>
+<!-- User Profile Action -->
+<div class="flex items-center">
+<button aria-label="Perfil do Usuário" class="w-10 h-10 rounded-full bg-[#997F9F] flex items-center justify-center text-white shadow-sm hover:opacity-90 focus:outline-none" type="button">
+<svg class="w-6 h-6 stroke-[1.8]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+</div>
+</div>
+</header>
+<!-- END: MainHeader -->
+<!-- BEGIN: MainContent -->
+<main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex-grow mb-12">
+<!-- Top Two-Column Section: Architecture Intro + Origem da Ideia Card -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start mb-10">
+<!-- Left Column: Title and Concept Details -->
+<div class="lg:col-span-7 flex flex-col justify-start">
+<h1 class="font-display text-3xl sm:text-4xl lg:text-[44px] uppercase leading-[1.15] tracking-wide text-[#3E2346] mb-6">
+          Arquitetura da<br>Casa Inteligente
+        </h1>
+<p class="text-sm sm:text-base text-gray-700 leading-relaxed font-normal mb-8 max-w-xl text-justify">
+          A arquitetura da CASA INTELIGENTE é baseada na integração de dispositivos eletrônicos, sensores e sistemas de controle, permitindo a automação de funções essenciais do ambiente doméstico. Esses elementos trabalham de forma conjunta para proporcionar mais acessibilidade, segurança e autonomia aos usuários.
+        </p>
+<!-- Video Demonstration Call to Action -->
+<h2 class="font-display uppercase tracking-wider text-[#482A4F] text-base sm:text-lg mb-4 flex items-center gap-2">
+<span class="">Veja nosso projeto funcionando:</span>
+</h2>
+<!-- Video Preview Container -->
+<div class="relative w-full aspect-[16/9] max-w-lg bg-[#4E2E55] rounded-3xl p-4 flex flex-col items-center justify-center video-card-shadow overflow-hidden group cursor-pointer" data-purpose="video-demonstration-player">
+<!-- Background Ambient Gradient Effect -->
+<div class="absolute inset-0 bg-gradient-to-tr from-[#381F3D] to-[#5C3765] opacity-90"></div>
+<!-- Centered Big Play Button -->
+<div class="relative z-10 w-20 h-20 rounded-full border-4 border-white flex items-center justify-center group-hover:scale-105 transition-transform duration-200">
+<svg class="w-10 h-10 text-white fill-current ml-1" viewBox="0 0 24 24">
+<path d="M8 5v14l11-7z"></path>
+</svg>
+</div>
+<!-- Video Title Overlay Label -->
+<span class="relative z-10 text-white/90 text-xs sm:text-sm font-medium mt-3 tracking-wide drop-shadow">
+            Demonstração da Maquete &amp; Automação
+          </span>
+</div>
+</div>
+<!-- Right Column: Origem da Ideia Lavender Card -->
+<div class="lg:col-span-5">
+<aside class="bg-[#93789C] text-white rounded-[2.25rem] p-7 sm:p-9 shadow-md" data-purpose="origin-story-card">
+<h2 class="font-display uppercase text-center tracking-wide text-xl sm:text-2xl mb-5 text-white/95">
+            Origem da Ideia
+          </h2>
+<div class="text-[13.5px] sm:text-[14px] leading-relaxed font-normal text-white/90 space-y-4 text-justify">
+<p class="">
+              A origem desse projeto surgiu a partir da observação das dificuldades enfrentadas por pessoas com mobilidade reduzida dentro de suas próprias residências.
+            </p>
+<p class="">
+              Atividades simples como acender uma luz ou abrir uma porta, podem se tornar desafiadoras na ausência de adaptações adequadas.
+            </p>
+<p class="">
+              Diante dessa realidade, surgiu a proposta de desenvolver uma solução baseada em automação residencial, com o objetivo de tornar o ambiente mais acessível, seguro e funcional.
+            </p>
+</div>
+</aside>
+</div>
+</div>
+<!-- BEGIN: SponsorsSection -->
+<section aria-labelledby="sponsors-title" class="mt-14" data-purpose="sponsors-showcase">
+<h2 class="font-display uppercase tracking-wider text-center text-lg sm:text-xl text-[#3E2346] mb-8" id="sponsors-title">
+        Conheça nossos patrocinadores:
+      </h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-7 items-stretch">
+<!-- Sponsor 1: DVD David Ricci Productions -->
+<article class="bg-[#EAE4DC] rounded-3xl p-6 sm:p-7 flex flex-col items-center text-center shadow-sm hover:shadow-md transition-shadow">
+<!-- Logo Mockup -->
+<div class="w-full h-32 bg-[#1C1C1C] rounded-2xl flex items-center justify-center p-3 mb-5 overflow-hidden"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBV1utNNIGTHUWRxLbWiaNrYTNLvRs4T-vOzLsiz_g9qCo4-Qi2R6VgndXyrU-F1BOBQWvWbgPbLB-UUsf3dFV6fZLFQS8AkMs2BkxbtdPTcOrtI4wG1Z3Q0TkGY0uvk0a0gf36-KDqUgwFje8IC6h5VY9F6lXTCzh2umpewpl4_d9u-nctCSBzQURXmXs7SyQz1IZZwWjWgpbzCllIIdo8Z90AULxGn-NzD_Lho3oE7FfO4vLZkoXCaDmjAcOCzdAYFw" alt="David Ricci Productions" class="h-full w-auto max-w-full object-contain rounded-xl"></div>
+<!-- Sponsor Contact Info -->
+<div class="text-xs sm:text-[13px] text-gray-800 space-y-2 mt-auto w-full">
+<div>
+<span class="font-bold text-[#3B2240] block uppercase tracking-wide text-[11px]">E-mail:</span>
+<a class="hover:underline break-all" href="mailto:dvdproducoesofc@gmail.com">dvdproducoesofc@gmail.com</a>
+</div>
+<div>
+<span class="font-bold text-[#3B2240] block uppercase tracking-wide text-[11px]">Telefone:</span>
+<span class="font-semibold">19 99437-3841</span>
+</div>
+<div>
+<span class="font-bold text-[#3B2240] block uppercase tracking-wide text-[11px]">Instagram:</span>
+<a class="hover:underline" href="https://instagram.com/dvdproductionsofc" rel="noopener noreferrer" target="_blank">@dvdproductionsofc</a>
+</div>
+</div>
+</article>
+<!-- Sponsor 2: Fortron Empresas -->
+<article class="bg-[#EAE4DC] rounded-3xl p-6 sm:p-7 flex flex-col items-center text-center shadow-sm hover:shadow-md transition-shadow">
+<!-- Logo Mockup -->
+<div class="w-full h-32 bg-[#33383E] rounded-2xl flex items-center justify-center p-3 mb-5 overflow-hidden"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuD91f6VrsgarK5xfi72sZJYYh8Rf4Y1i-SkKKAd4VZ6msFK_LnpFVPB8eOSNlEsuu7FoQ3IrZ6j4650KXL57K-vMUfpMj2Bs6WK-C0osAVcGC_thNvHbEHOr5DrMtQSGQnJBM2o9t0EzNRq8d5nMrdMxATkmTiZL0BYDlY9siSqGzsr0TUFiihrTfxS4FaWETYlQTf-VuuZLAxhZCo82Bh3diOAQTY4Oi-VLiiZW-l2mVFQeSZb34GPT0nvDs0sOUfkEg" alt="Fortron Empresas" class="h-full w-auto max-w-full object-contain rounded-xl"></div>
+<!-- Sponsor Contact Info -->
+<div class="text-xs sm:text-[13px] text-gray-800 space-y-1.5 mt-auto w-full">
+<div>
+<span class="font-bold text-[#3B2240] block uppercase tracking-wide text-[11px]">E-mail:</span>
+<a class="hover:underline break-all" href="mailto:matheus@fortronempresas.com.br">matheus@fortronempresas.com.br</a>
+</div>
+<div>
+<span class="font-bold text-[#3B2240] block uppercase tracking-wide text-[11px]">Telefone:</span>
+<span class="font-semibold">19 99656-6925</span>
+</div>
+<div>
+<span class="font-bold text-[#3B2240] block uppercase tracking-wide text-[11px]">Instagram:</span>
+<a class="hover:underline" href="https://instagram.com/matheusfortron" rel="noopener noreferrer" target="_blank">@matheusfortron</a>
+</div>
+<div>
+<span class="font-bold text-[#3B2240] block uppercase tracking-wide text-[11px]">Site:</span>
+<a class="text-blue-900 hover:underline break-all font-medium" href="https://www.fortronempresas.com.br" rel="noopener noreferrer" target="_blank">https://www.fortronempresas.com.br</a>
+</div>
+</div>
+</article>
+<!-- Sponsor 3: Água Mineral Natural Estância -->
+<article class="bg-[#EAE4DC] rounded-3xl p-6 sm:p-7 flex flex-col items-center text-center shadow-sm hover:shadow-md transition-shadow">
+<!-- Logo Mockup -->
+<div class="w-full h-32 bg-gradient-to-b from-[#ECEBE4] to-[#B7C7B3] rounded-2xl flex flex-col items-center justify-center p-3 mb-5 border border-black/5 overflow-hidden relative">
+<span class="text-[10px] font-serifScript italic text-gray-800">Água Mineral Natural</span>
+<span class="text-2xl font-serif font-black tracking-tight text-[#163820] -mt-0.5">Estância</span>
+<span class="text-[9px] font-sans text-amber-900 font-semibold italic">Fonte São Luiz !</span>
+<!-- Natural elements decor icon -->
+<div class="mt-1 flex items-center justify-center text-emerald-800 gap-1 opacity-70">
+<svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M10 2L3 14h14L10 2z"></path></svg>
+<svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M10 1L2 15h16L10 1z"></path></svg>
+<svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M10 2L3 14h14L10 2z"></path></svg>
+</div>
+</div>
+<!-- Sponsor Contact Info -->
+<div class="text-xs sm:text-[13px] text-gray-800 space-y-2 mt-auto w-full">
+<div>
+<span class="font-bold text-[#3B2240] block uppercase tracking-wide text-[11px]">E-mail:</span>
+<a class="hover:underline break-all" href="mailto:josluis.eugenio@yahoo.com.br">josluis.eugenio@yahoo.com.br</a>
+</div>
+<div>
+<span class="font-bold text-[#3B2240] block uppercase tracking-wide text-[11px]">Telefone:</span>
+<span class="font-semibold">19 97149-9990</span>
+</div>
+</div>
+</article>
+</div>
+</section>
+<!-- END: SponsorsSection -->
+</main>
+<!-- END: MainContent -->
+<!-- BEGIN: MainFooter -->
+<footer class="footer-bar bg-[#E8E2D8] pt-8 pb-7 px-4 sm:px-8 mt-6" data-purpose="tcc-academic-footer">
+<div class="max-w-5xl mx-auto flex flex-col items-center text-center">
+<!-- Academic Project Title -->
+<h3 class="font-display uppercase tracking-wider text-base sm:text-lg text-[#3E2346] mb-5">
+        Trabalho de Conclusão de Curso: Casa Inteligente
+      </h3>
+<!-- Contact & School Credits 2-column Grid -->
+<div class="w-full grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm text-gray-800 font-medium">
+<!-- Left Group -->
+<div class="space-y-1 sm:text-right sm:pr-8 sm:border-r sm:border-gray-400/50">
+<p class="">
+<span class="font-semibold text-[#3E2346]">Instagram:</span>
+<a class="hover:underline" href="https://instagram.com/tcc_casainteligente" rel="noopener noreferrer" target="_blank">@tcc_casainteligente</a>
+</p>
+<p class="">
+<span class="font-semibold text-[#3E2346]">Contato:</span> (19) 99641-5255
+          </p>
+</div>
+<!-- Right Group -->
+<div class="space-y-1 sm:text-left sm:pl-8">
+<p class="font-semibold text-gray-800">
+            3 Desenvolvimento de Sistemas AMS
+          </p>
+<p class="text-gray-700">
+            ETEC Pedro Ferreira Alves
+          </p>
+</div>
+</div>
+</div>
+</footer>
+<!-- END: MainFooter -->
+
+
+
+
+
+
+</body></html>

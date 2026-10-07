@@ -1,0 +1,156 @@
+<!DOCTYPE html><html lang="pt-BR" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Desenvolvimento Técnico - Casa Inteligente</title>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Montserrat:wght@800;900&amp;display=swap" rel="stylesheet">
+<!-- Tailwind Configuration -->
+<script data-purpose="tailwind-config">
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              bg: '#F3EFE6',
+              primary: '#482A4F',
+              pill: '#926D97',
+              pillHover: '#7e5b83',
+              pillActive: '#65426B',
+              footer: '#E9E2D5',
+              cardBg: 'rgba(255, 255, 255, 0.45)'
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            title: ['"Montserrat"', '"Plus Jakarta Sans"', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+<!-- Custom Typography & Specific Styles -->
+<style data-purpose="typography">
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #F3EFE6;
+      color: #332738;
+      -webkit-font-smoothing: antialiased;
+    }
+    .title-headline {
+      font-family: 'Montserrat', sans-serif;
+      letter-spacing: -0.01em;
+      line-height: 1.15;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-[#926D97] selection:text-white">
+<!-- BEGIN: MainHeader -->
+<header class="w-full bg-[#E8E1D4]/90 backdrop-blur-sm border-b border-[#D8CEBF] shadow-[0_4px_20px_rgba(0,0,0,0.06)] relative z-20">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+<!-- Brand Logo Section -->
+<a aria-label="Página Inicial da Casa Inteligente" class="flex items-center gap-2 group transition-transform active:scale-95" href="{{DATA:SCREEN:SCREEN_25}}">
+<div class="flex flex-col items-center">
+<svg class="w-9 h-9 text-[#482A4F]" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 48 48">
+<!-- Outline of House -->
+<path d="M6 21.5L24 6L42 21.5V40C42 41.1046 41.1046 42 40 42H8C6.89543 42 6 41.1046 6 40V21.5Z"></path>
+<!-- Heart icon inside -->
+<path d="M24 29.5C24 29.5 20 26 18.5 24C16.8 21.8 17.8 18.8 20.5 18.8C22.2 18.8 23.4 20 24 21C24.6 20 25.8 18.8 27.5 18.8C30.2 18.8 31.2 21.8 29.5 24C28 26 24 29.5 24 29.5Z" fill="#482A4F"></path>
+</svg>
+<span class="text-[9px] font-bold tracking-tight text-[#482A4F] uppercase -mt-0.5">casa inteligente</span>
+</div>
+</a>
+<!-- Navigation Menu Pill Bar -->
+<nav aria-label="Navegação Principal" class="hidden md:flex items-center gap-3"><a class="px-6 py-2 rounded-full text-white text-sm font-semibold bg-[#926D97] hover:bg-[#825c87] shadow-sm transition-all duration-200 cursor-pointer" href="{{DATA:SCREEN:SCREEN_25}}">Início</a>
+<a class="px-6 py-2 rounded-full text-white text-sm font-semibold bg-[#926D97] hover:bg-[#825c87] shadow-sm transition-all duration-200 cursor-pointer" href="{{DATA:SCREEN:SCREEN_21}}">Projeto</a>
+<a aria-current="page" class="px-6 py-2 rounded-full text-white text-sm font-bold bg-[#65426B] shadow-[inset_0_2px_4px_rgba(0,0,0,0.25),0_2px_6px_rgba(72,42,79,0.3)] ring-2 ring-[#482A4F]/20 scale-105 transition-all duration-200 cursor-pointer" href="{{DATA:SCREEN:SCREEN_17}}">Desenvolvimento</a>
+<a class="px-6 py-2 rounded-full text-white text-sm font-semibold bg-[#926D97] hover:bg-[#825c87] shadow-sm transition-all duration-200 cursor-pointer" href="{{DATA:SCREEN:SCREEN_19}}">Curso</a>
+<a class="px-6 py-2 rounded-full text-white text-sm font-semibold bg-[#926D97] hover:bg-[#825c87] shadow-sm transition-all duration-200 cursor-pointer" href="{{DATA:SCREEN:SCREEN_3}}">Referências</a></nav>
+<!-- Profile Avatar Button -->
+<div class="flex items-center">
+<button aria-label="Perfil do usuário" class="w-11 h-11 rounded-full bg-[#926D97] flex items-center justify-center text-white hover:bg-[#7e5b83] transition-all shadow-sm focus:outline-none focus:ring-2 focus:ring-[#482A4F] focus:ring-offset-2" type="button">
+<svg class="w-6 h-6 stroke-[1.8]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<circle cx="12" cy="8" r="4.2"></circle>
+<path d="M4 20c0-4 4-6.5 8-6.5s8 2.5 8 6.5"></path>
+</svg>
+</button>
+</div>
+</div>
+</header>
+<!-- END: MainHeader -->
+<!-- BEGIN: MainContent -->
+<main class="flex-grow max-w-4xl w-full mx-auto px-5 sm:px-8 py-10 sm:py-14 flex flex-col items-center justify-center">
+<!-- Section Heading -->
+<header class="text-center mb-8 sm:mb-12">
+<h1 class="title-headline text-3xl sm:text-4xl md:text-[2.75rem] font-black text-[#482A4F] uppercase tracking-normal">
+        COMO NOSSO PROJETO<br>FOI DESENVOLVIDO
+      </h1>
+</header>
+<!-- Technical Development Cards Container -->
+<section aria-label="Etapas de desenvolvimento do projeto" class="w-full flex flex-col gap-5 sm:gap-6 text-center">
+<!-- Stage Card 1: Contexto e Motivação -->
+<article class="bg-white/50 backdrop-blur-sm rounded-2xl p-6 sm:px-10 sm:py-7 border border-[#E4DCCE] shadow-[0_2px_8px_rgba(72,42,79,0.03)] hover:bg-white/70 hover:shadow-md transition-all duration-300" data-purpose="content-card">
+<p class="text-[#2F2232] text-sm sm:text-base leading-relaxed sm:leading-loose font-normal">
+          O projeto foi idealizado como uma solução de tecnologia assistiva de baixo custo para mitigar barreiras cotidianas enfrentadas por idosos e pessoas com deficiências motoras, automatizando comandos básicos como acionamento de lâmpadas, movimentação mecânica de acessos e alertas sonoros.
+        </p>
+</article>
+<!-- Stage Card 2: Metodologia e Especificação -->
+<article class="bg-white/50 backdrop-blur-sm rounded-2xl p-6 sm:px-10 sm:py-7 border border-[#E4DCCE] shadow-[0_2px_8px_rgba(72,42,79,0.03)] hover:bg-white/70 hover:shadow-md transition-all duration-300" data-purpose="content-card">
+<p class="text-[#2F2232] text-sm sm:text-base leading-relaxed sm:leading-loose font-normal">
+          A etapa inicial concentrou-se no levantamento bibliográfico do estado da arte e na especificação rigorosa dos requisitos funcionais e arquiteturais do ecossistema. A partir disso, foram elaborados os diagramas de casos de uso (UML), a modelagem de dados e os mockups de interface, além da distribuição das tarefas em frentes integradas de trabalho cobrindo firmware, design visual, desenvolvimento de software e documentação acadêmica.
+        </p>
+</article>
+<!-- Stage Card 3: Arquitetura Técnica & Hardware -->
+<article class="bg-white/50 backdrop-blur-sm rounded-2xl p-6 sm:px-10 sm:py-7 border border-[#E4DCCE] shadow-[0_2px_8px_rgba(72,42,79,0.03)] hover:bg-white/70 hover:shadow-md transition-all duration-300" data-purpose="content-card">
+<p class="text-[#2F2232] text-sm sm:text-base leading-relaxed sm:leading-loose font-normal">
+          A arquitetura do sistema foi estruturada conectando uma interface web de alto contraste ao Firebase (para autenticação de usuários e sincronização de comandos em tempo real), passando por um servidor backend intermediário em Node.js/Express hospedado na Railway para segurança e controle de dados. Na camada física, o controlador embarcado (com base no ecossistema Arduino/ESP8266) gerencia o circuito montado com sensores de presença e luminosidade (LDR), atuadores motorizados e módulos de relé para chaveamento de cargas.
+        </p>
+</article>
+<!-- Stage Card 4: Validação, Acessibilidade e Resultados -->
+<article class="bg-white/50 backdrop-blur-sm rounded-2xl p-6 sm:px-10 sm:py-7 border border-[#E4DCCE] shadow-[0_2px_8px_rgba(72,42,79,0.03)] hover:bg-white/70 hover:shadow-md transition-all duration-300" data-purpose="content-card">
+<p class="text-[#2F2232] text-sm sm:text-base leading-relaxed sm:leading-loose font-normal">
+          Por fim, a solução foi validada por meio de testes automatizados e manuais focados nas diretrizes de acessibilidade (WCAG), incluindo simulação do circuito no software Wokwi e testes funcionais de tempo de resposta dos atuadores. O processo confirmou a viabilidade técnica e financeira da proposta — mantendo os custos de hardware em uma faixa muito inferior às soluções proprietárias do mercado — e estabeleceu a base para ampliações futuras como acionamento nativo por voz e aplicativos dedicados.
+        </p>
+</article>
+</section><section aria-label="Integrantes da equipe do projeto" class="w-full mt-12 sm:mt-16 flex flex-col items-center"><div class="text-center mb-10"><h2 class="title-headline text-2xl sm:text-3xl md:text-4xl font-black text-[#482A4F] uppercase tracking-normal">NOSSA EQUIPE</h2><p class="text-[#5A3862] text-sm sm:text-base font-medium mt-2">Conheça os integrantes responsáveis pelo projeto</p></div><div class="w-full grid grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 justify-items-center"><div class="flex flex-col items-center text-center group cursor-pointer animate-float-1"><div class="w-28 h-28 sm:w-32 sm:h-32 rounded-full bg-[#FAF7F2] border-2 border-[#D8CEBF] shadow-[0_8px_20px_rgba(72,42,79,0.08)] flex items-center justify-center p-2 transition-all duration-300 group-hover:scale-105 group-hover:shadow-[0_12px_28px_rgba(72,42,79,0.16)] group-hover:border-[#926D97]"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKOwB8TXy7g4O-Dy8e8ZuPIq9EapBjfZe_qN06joFTQ0iXDDxBZ_u7U9R3JysxlTrPyOqyMp7WBwPAn8yS4udpPuuooTtnksoAFl9RMb7BPCIrJLrKbNzaB38TwQnKYv7161x5HijGigIKB4Yfcw4a5BwnsnLaZnJGMTxjqe0eCnNUdKFVQLLY4Vu64Ax5UQ985W73oy_cFK8sLCqAdI9fgO6REVZ0GyyPgHxZaMiNUg9gTAzjMtZh0SeO_IcWPIpWEQ" alt="Lucas Gabriel" class="w-full h-full object-cover rounded-full"></div><h3 class="mt-3.5 text-base sm:text-lg font-bold text-[#482A4F]">Lucas Ribeiro</h3><span class="text-xs sm:text-sm font-medium text-[#705579]">Documentação &amp; Pesquisa</span></div><div class="flex flex-col items-center text-center group cursor-pointer animate-float-2"><div class="w-28 h-28 sm:w-32 sm:h-32 rounded-full bg-[#FAF7F2] border-2 border-[#D8CEBF] shadow-[0_8px_20px_rgba(72,42,79,0.08)] flex items-center justify-center p-2 transition-all duration-300 group-hover:scale-105 group-hover:shadow-[0_12px_28px_rgba(72,42,79,0.16)] group-hover:border-[#926D97]"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQLKr0GF7uQQp-CZh6v-nPprBxpdQCuxxRswDjiXNIv0ni4gCgC0jMS3Eszcq8OmC6XPyLfuKNclzHWTWiu0PEzV5cwC1ndf6muUUaelnlrQWnBVRGg9n2h5r8iG6UuDbfT0wHexcx3OojYUNbIvHzziLj9JW8newQb9gvHIj_kNDXdM6PopPx49zlTIjsuKXt9qePSAJqyWse7X5a3-NteX2OVG7zmrKDcKKwQREKYTZMIWoS9O81G1gI3kE4mF4eDg" alt="Matheus Ferreira" class="w-full h-full object-cover rounded-full"></div><h3 class="mt-3.5 text-base sm:text-lg font-bold text-[#482A4F]">Henrique Delalibera</h3><span class="text-xs sm:text-sm font-medium text-[#705579]">Engenharia de Software &amp; Firmware</span></div><div class="flex flex-col items-center text-center group cursor-pointer animate-float-3"><div class="w-28 h-28 sm:w-32 sm:h-32 rounded-full bg-[#FAF7F2] border-2 border-[#D8CEBF] shadow-[0_8px_20px_rgba(72,42,79,0.08)] flex items-center justify-center p-2 transition-all duration-300 group-hover:scale-105 group-hover:shadow-[0_12px_28px_rgba(72,42,79,0.16)] group-hover:border-[#926D97]"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAXjt0QvLyk2FWK09QyiSFhx0z8XE62xx1edQySZ5zWoRcu0CoZJoxEzA3T-OFV9YkyjcaTh1wSHgwuE8iJIgyUm9Tal0c-a51qNO-tS_RS6LQojCesmB2FRNW8I_N_zQS8rBjAcWHBkK8lvQKvfTFsMe3Ed60biuyOatMKM-p-OYyVC19dzDxt-ehobiiT_9wQXdkeC806kiuWh0Pzy-r9imvxsPIpCteKM31yGjTcYUi2yggymyl4E16Ayy_0n9iX8w" alt="Maria Eduarda" class="w-full h-full object-cover rounded-full"></div><h3 class="mt-3.5 text-base sm:text-lg font-bold text-[#482A4F]">Rebeca Damasio</h3><span class="text-xs sm:text-sm font-medium text-[#705579]">Design de Interface &amp; Experiência&nbsp;</span></div><div class="flex flex-col items-center text-center group cursor-pointer animate-float-4"><div class="w-28 h-28 sm:w-32 sm:h-32 rounded-full bg-[#FAF7F2] border-2 border-[#D8CEBF] shadow-[0_8px_20px_rgba(72,42,79,0.08)] flex items-center justify-center p-2 transition-all duration-300 group-hover:scale-105 group-hover:shadow-[0_12px_28px_rgba(72,42,79,0.16)] group-hover:border-[#926D97]"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBoUaCbEjw7qwUPCQ5MmnuDcT_artLjlcjCUjmoOTND3-IIVuZaaN_TYCV_GRpJIg2ApNQZ4uRAdbHkOUBmhGZQeblMx2XwMMv3q8JjA6QKWYhCCLV2Kqt5Cw9VjDTQFsauUfAOZDb1uRbJEd1mtfN2p9pvI3P-dHTiayXE4KLCsD9My_A7sw0HmJXUDuPAfQsKYNOzp4bpQFSddcnRy4gyClW0mXnYoMfoW0BMw1u_-Os1kWjSVxFQwd7PnmxaIics-g" alt="Guilherme Santos" class="w-full h-full object-cover rounded-full"></div><h3 class="mt-3.5 text-base sm:text-lg font-bold text-[#482A4F]">Thiago Pinheiro</h3><span class="text-xs sm:text-sm font-medium text-[#705579]">Full-Stack &amp; Integração de Sistemas</span></div><div class="flex flex-col items-center text-center group cursor-pointer animate-float-5"><div class="w-28 h-28 sm:w-32 sm:h-32 rounded-full bg-[#FAF7F2] border-2 border-[#D8CEBF] shadow-[0_8px_20px_rgba(72,42,79,0.08)] flex items-center justify-center p-2 transition-all duration-300 group-hover:scale-105 group-hover:shadow-[0_12px_28px_rgba(72,42,79,0.16)] group-hover:border-[#926D97]"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPrM53Qn2FwxoCSafGCLQWutNG6J0B6O3CXv2EGecXt1p0-QkiWP073mJCghhCiZ7DMxwFh_Tf6WHjUHPftvfVRRXXxOyBUhvupDhwXutE1daU0xYh3z7cZ_F9fSU215F9pXfONnH1_ef04xkkRO7b97DtYzVHdx1Nm8GZxFTNYyzym5K1kWTL4hDWKzeewtuglTqUA9xu6ojspredrlu5aP4sNDnxbNNr_qDyJKdkETFcBeBGde4HDappyeV3epaYBg" alt="Beatriz Lima" class="w-full h-full object-cover rounded-full"></div><h3 class="mt-3.5 text-base sm:text-lg font-bold text-[#482A4F]">Sofia Lopes</h3><span class="text-xs sm:text-sm font-medium text-[#705579]">Desenvolvimento Web</span></div><div class="flex flex-col items-center text-center group cursor-pointer animate-float-6"><div class="w-28 h-28 sm:w-32 sm:h-32 rounded-full bg-[#FAF7F2] border-2 border-[#D8CEBF] shadow-[0_8px_20px_rgba(72,42,79,0.08)] flex items-center justify-center p-2 transition-all duration-300 group-hover:scale-105 group-hover:shadow-[0_12px_28px_rgba(72,42,79,0.16)] group-hover:border-[#926D97]"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAc0b5AcO-Uy2idJW7eG0qID3b0G92XgxNbxLS9KqTNOSQOJ7hG2siGSUh6cATPGiaSlAQn4rPjAjU7KlFxjKHF0tOn_rtkxYdU1jILs8g_0-eX5aii9JX9NlUSGColaZa8H_SwFjUArZdTNyfDAFOeuLWsrUmSkIcAiwMC1Uhvw153l76wkfEUPKph2SBKJ7-9HmY_EF8mT1fPWyxnhHAv6hcyIQW3LjnheTrGp2VA8OpwHrvxcE8FQSViLt5wbUWBGw" alt="Vinícius Rocha" class="w-full h-full object-cover rounded-full"></div><h3 class="mt-3.5 text-base sm:text-lg font-bold text-[#482A4F]">Isabela Scuciatto</h3><span class="text-xs sm:text-sm font-medium text-[#705579]">Documentação &amp; Pesquisa</span></div></div></section>
+</main>
+<!-- END: MainContent -->
+<!-- BEGIN: MainFooter -->
+<footer class="w-full bg-[#E9E2D6] border-t border-[#DCD3C5] py-8 px-6 sm:px-12 mt-12 shadow-[0_-4px_20px_rgba(0,0,0,0.04)]">
+<div class="max-w-4xl mx-auto flex flex-col items-center text-center">
+<!-- Academic Project Title -->
+<h2 class="title-headline text-base sm:text-lg font-black tracking-wide text-[#482A4F] uppercase mb-4">
+      TRABALHO DE CONCLUSÃO DE CURSO: CASA INTELIGENTE
+    </h2>
+<!-- Details Grid -->
+<div class="w-full grid grid-cols-1 md:grid-cols-2 gap-y-2.5 gap-x-8 text-xs sm:text-sm font-medium text-[#482A4F]">
+<!-- Column 1: Social and Contact -->
+<div class="flex flex-col gap-1.5 md:text-center">
+<p class="tracking-wide">INSTAGRAM: <span class="font-normal text-[#5A3862]">@tcc_casainteligente</span></p>
+<p class="tracking-wide">CONTATO: <span class="font-normal text-[#5A3862]">(19) 99641-5255</span></p>
+</div>
+<!-- Column 2: Academic Info -->
+<div class="flex flex-col gap-1.5 md:text-center">
+<p class="tracking-wide">3 DESENVOLVIMENTO DE SISTEMAS AMS</p>
+<p class="tracking-wide">ETEC Pedro Ferreira Alves</p>
+</div>
+</div>
+</div>
+</footer>
+<!-- END: MainFooter -->
+
+
+
+
+
+
+
+
+
+
+
+
+</body></html>

@@ -1,0 +1,784 @@
+<!DOCTYPE html><html lang="pt-BR"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Cadastre-se - Casa Inteligente</title>
+<!-- Tailwind CSS CDN with forms and container queries plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts for Fredoka / Baloo 2 to match the cute rounded aesthetic font in the original image -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Google Material Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style data-purpose="custom-typography">
+    body {
+      font-family: 'Fredoka', cursive, sans-serif;
+    }
+    .font-sans-data {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+  </style>
+<style data-purpose="custom-colors">
+    /* Exact palette matching from design reference */
+    .bg-main-cream {
+      background-color: #edeae2;
+    }
+    .bg-card-purple {
+      background-color: #553457;
+    }
+    .bg-input-purple {
+      background-color: #ffffff;
+    }
+    .bg-btn-dark {
+      background-color: #2a1f2b;
+    }
+    .bg-btn-light {
+      background-color: #9b7ba0;
+    }
+    .text-theme-dark {
+      color: #553457;
+    }
+    /* Toast Animation */
+    @keyframes slideDownFade {
+      0% {
+        opacity: 0;
+        transform: translate(-50%, -20px) scale(0.95);
+      }
+      100% {
+        opacity: 1;
+        transform: translate(-50%, 0) scale(1);
+      }
+    }
+    .toast-animate-in {
+      animation: slideDownFade 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+  </style>
+</head>
+<body class="bg-main-cream min-h-screen flex flex-col relative select-none antialiased">
+<!-- BEGIN: Toast Notification -->
+<div class="fixed top-6 left-1/2 -translate-x-1/2 z-50 transition-all duration-300 pointer-events-none opacity-0 invisible" id="toast-container">
+<div class="flex items-center gap-3 px-6 py-3.5 rounded-full shadow-2xl text-white text-sm font-semibold tracking-wide border border-white/20 backdrop-blur-md" id="toast-box">
+<span class="material-symbols-outlined text-xl" id="toast-icon">check_circle</span>
+<span id="toast-message">Operação realizada com sucesso!</span>
+</div>
+</div>
+<!-- END: Toast Notification -->
+<!-- BEGIN: HeaderBrand -->
+<!-- Top-right branding area containing logo and brand text -->
+<header class="absolute top-6 right-8 sm:top-10 sm:right-12 z-10" data-purpose="brand-header">
+<div class="flex flex-col items-center">
+<!-- House and heart illustration -->
+<div class="relative w-14 h-14 flex items-center justify-center">
+<!-- House outline -->
+<svg class="w-12 h-12 text-[#68436a]" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" viewBox="0 0 48 48">
+<!-- Stylized roof and house walls with bottom-left open corner curve -->
+<path d="M 24 6 L 41 20.5 L 35 20.5 L 35 38 A 4 4 0 0 1 31 42 L 15 42 A 4 4 0 0 1 11 38 L 11 19 L 24 6 Z"></path>
+</svg>
+<!-- Purple Heart placed at the upper-right section of the house -->
+<svg class="w-5 h-5 absolute -top-0.5 right-0.5 text-[#734c74] fill-current" viewBox="0 0 24 24">
+<path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path>
+</svg>
+</div>
+<!-- Brand title below icon -->
+<span class="text-[#553457] text-xs font-bold tracking-tight mt-1">
+        casa inteligente
+      </span>
+</div>
+</header>
+<!-- END: HeaderBrand -->
+<!-- BEGIN: MainContent -->
+<!-- Centered content section framing the card -->
+<main class="flex-1 flex flex-col items-center justify-start pt-16 sm:pt-20 px-4 sm:px-6 w-full">
+<!-- BEGIN: AuthenticationCard -->
+<div class="w-full max-w-[430px] bg-card-purple rounded-[36px] px-8 pt-8 pb-9 shadow-lg mt-2 sm:mt-4 text-white transition-all duration-300" data-purpose="registration-card">
+<!-- ==================== CADASTRO VIEW ==================== -->
+<div id="view-register">
+<!-- Card Title -->
+<h1 class="text-center text-xl sm:text-2xl font-bold tracking-wider mb-6">
+      CADASTRE-SE
+    </h1>
+<!-- Top Status / Feedback Banner inside Form -->
+<div class="hidden mb-4 p-3 rounded-2xl text-xs font-sans-data font-semibold text-center transition-all duration-200" id="register-status-alert"></div>
+<!-- Registration Form -->
+<form class="space-y-4" id="registration-form" method="POST" novalidate="" onsubmit="handleRegister(event);">
+<!-- Field: Nome -->
+<div>
+<label class="block text-sm sm:text-base font-bold tracking-wide mb-1 px-3" for="name">
+          NOME:
+        </label>
+<input autocomplete="name" class="w-full h-11 bg-input-purple border-2 border-transparent rounded-full px-5 text-[#2a1f2b] font-medium placeholder-purple-300 focus:outline-none focus:border-[#bfa3c6] focus:ring-0 transition-all" id="name" name="name" placeholder="Ex: Maria da Silva" type="text">
+<span class="hidden text-xs text-rose-200 bg-rose-950/40 border border-rose-400/30 rounded-xl px-3 py-1.5 mt-1.5 block font-sans-data font-medium" id="error-name"></span>
+</div>
+<!-- Field: E-mail -->
+<div>
+<label class="block text-sm sm:text-base font-bold tracking-wide mb-1 px-3" for="email">
+          E-MAIL:
+        </label>
+<input autocomplete="email" class="w-full h-11 bg-input-purple border-2 border-transparent rounded-full px-5 text-[#2a1f2b] font-medium placeholder-purple-300 focus:outline-none focus:border-[#bfa3c6] focus:ring-0 transition-all" id="email" name="email" placeholder="exemplo@email.com" type="email">
+<span class="hidden text-xs text-rose-200 bg-rose-950/40 border border-rose-400/30 rounded-xl px-3 py-1.5 mt-1.5 block font-sans-data font-medium flex items-center gap-1.5" id="error-email"></span>
+</div>
+<!-- Field: Senha -->
+<div>
+<label class="block text-sm sm:text-base font-bold tracking-wide mb-1 px-3" for="password">
+          SENHA:
+        </label>
+<input autocomplete="new-password" class="w-full h-11 bg-input-purple border-2 border-transparent rounded-full px-5 text-[#2a1f2b] font-medium placeholder-purple-300 focus:outline-none focus:border-[#bfa3c6] focus:ring-0 transition-all" id="password" name="password" placeholder="••••••••" type="password">
+<span class="hidden text-xs text-rose-200 bg-rose-950/40 border border-rose-400/30 rounded-xl px-3 py-1.5 mt-1.5 block font-sans-data font-medium" id="error-password"></span>
+</div>
+<!-- Submit Button -->
+<div class="flex justify-center pt-2 pb-5">
+<button class="bg-btn-dark hover:bg-black/90 active:scale-95 text-white text-sm font-bold tracking-wider py-2.5 px-8 rounded-full transition-transform flex items-center justify-center gap-2 cursor-pointer shadow-md disabled:opacity-60 disabled:cursor-not-allowed" id="btn-submit" type="submit">
+          ENTRAR
+        </button>
+</div>
+</form>
+<!-- BEGIN: ExistingAccountFooter -->
+<div class="flex items-center justify-center gap-3 pt-2" data-purpose="login-redirect-section">
+<span class="text-sm font-bold tracking-wide">
+        JÁ TENHO CONTA:
+      </span>
+<button class="inline-flex items-center justify-center bg-btn-light hover:bg-[#a988ae] active:scale-95 text-white text-sm font-bold px-7 py-2 rounded-full transition-transform shadow-sm cursor-pointer" onclick="toggleAuthMode('login')" type="button">
+        ENTRAR
+      </button>
+</div>
+<!-- END: ExistingAccountFooter -->
+</div>
+<!-- ==================== LOGIN VIEW ==================== -->
+<div class="hidden" id="view-login">
+<!-- Card Title -->
+<h1 class="text-center text-xl sm:text-2xl font-bold tracking-wider mb-6">
+      ACESSAR CONTA
+    </h1>
+<!-- Top Status / Feedback Banner inside Login Form -->
+<div class="hidden mb-4 p-3 rounded-2xl text-xs font-sans-data font-semibold text-center transition-all duration-200" id="login-status-alert"></div>
+<!-- Login Form -->
+<form class="space-y-4" id="login-form" method="POST" novalidate="" onsubmit="handleLogin(event);">
+<!-- Field: E-mail -->
+<div>
+<label class="block text-sm sm:text-base font-bold tracking-wide mb-1 px-3" for="login-email">
+          E-MAIL:
+        </label>
+<input autocomplete="email" class="w-full h-11 bg-input-purple border-2 border-transparent rounded-full px-5 text-[#2a1f2b] font-medium placeholder-purple-300 focus:outline-none focus:border-[#bfa3c6] focus:ring-0 transition-all" id="login-email" name="login-email" placeholder="exemplo@email.com" type="email">
+<span class="hidden text-xs text-rose-200 bg-rose-950/40 border border-rose-400/30 rounded-xl px-3 py-1.5 mt-1.5 block font-sans-data font-medium flex items-center gap-1.5" id="error-login-email"></span>
+</div>
+<!-- Field: Senha -->
+<div>
+<label class="block text-sm sm:text-base font-bold tracking-wide mb-1 px-3" for="login-password">
+          SENHA:
+        </label>
+<input autocomplete="current-password" class="w-full h-11 bg-input-purple border-2 border-transparent rounded-full px-5 text-[#2a1f2b] font-medium placeholder-purple-300 focus:outline-none focus:border-[#bfa3c6] focus:ring-0 transition-all" id="login-password" name="login-password" placeholder="••••••••" type="password">
+<span class="hidden text-xs text-rose-200 bg-rose-950/40 border border-rose-400/30 rounded-xl px-3 py-1.5 mt-1.5 block font-sans-data font-medium" id="error-login-password"></span>
+</div>
+<!-- Submit Button -->
+<div class="flex justify-center pt-2 pb-5">
+<button class="bg-btn-dark hover:bg-black/90 active:scale-95 text-white text-sm font-bold tracking-wider py-2.5 px-8 rounded-full transition-transform flex items-center justify-center gap-2 cursor-pointer shadow-md" type="submit">
+          ENTRAR
+        </button>
+</div>
+</form>
+<!-- Switch back to register -->
+<div class="flex items-center justify-center gap-3 pt-2">
+<span class="text-sm font-bold tracking-wide">
+        NÃO TEM CONTA?
+      </span>
+<button class="inline-flex items-center justify-center bg-btn-light hover:bg-[#a988ae] active:scale-95 text-white text-sm font-bold px-5 py-2 rounded-full transition-transform shadow-sm cursor-pointer" onclick="toggleAuthMode('register')" type="button">
+        CADASTRAR
+      </button>
+</div>
+</div>
+</div>
+<!-- END: AuthenticationCard -->
+</main>
+<!-- END: MainContent -->
+<!-- BEGIN: Database Inspection Trigger Button (Floating Bottom Bar) -->
+<div class="fixed bottom-4 left-4 sm:bottom-6 sm:left-6 z-30">
+<button class="flex items-center gap-2.5 bg-[#553457]/90 hover:bg-[#553457] active:scale-95 text-white text-xs sm:text-sm font-bold py-2 px-4 rounded-full shadow-lg border border-white/20 transition-all backdrop-blur-sm cursor-pointer" onclick="openDatabaseModal()" type="button">
+<span class="material-symbols-outlined text-base">database</span>
+<span>Ver banco de dados (<span id="user-count-badge">0</span>)</span>
+</button>
+</div>
+<!-- END: Database Inspection Trigger Button -->
+<!-- BEGIN: Database Inspection Modal -->
+<div class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300" id="database-modal">
+<div class="bg-[#fff7fc] w-full max-w-2xl rounded-3xl shadow-2xl border border-[#ecdeed] overflow-hidden flex flex-col max-h-[88vh] transform scale-95 transition-all duration-300 font-sans-data" id="modal-panel">
+<!-- Modal Header -->
+<div class="bg-[#553457] text-white px-6 py-4 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-2xl text-purple-200">storage</span>
+<div>
+<h2 class="font-bold text-lg leading-snug">Banco de Dados: <span class="text-purple-200 font-mono text-sm">casa_inteligente_users</span></h2>
+<p class="text-xs text-purple-200/80">Registros sincronizados em tempo real no localStorage</p>
+</div>
+</div>
+<button class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors cursor-pointer" onclick="closeDatabaseModal()" type="button">
+<span class="material-symbols-outlined text-lg">close</span>
+</button>
+</div>
+<!-- Modal Actions & Stats -->
+<div class="bg-[#f8e9f9] px-6 py-3 border-b border-[#ecdeed] flex items-center justify-between flex-wrap gap-2">
+<div class="text-xs text-[#553457] font-semibold">
+        Total de usuários: <span class="font-bold text-[#2a1f2b]" id="total-users-label">0</span>
+</div>
+<div class="flex items-center gap-2">
+<button class="text-xs text-rose-700 hover:text-rose-800 bg-rose-100 hover:bg-rose-200 font-semibold px-3 py-1.5 rounded-full transition-colors flex items-center gap-1 cursor-pointer" onclick="clearDatabase()" type="button">
+<span class="material-symbols-outlined text-sm">delete</span>
+          Limpar dados
+        </button>
+<button class="text-xs text-[#553457] hover:text-[#2a1f2b] bg-white border border-[#cfc3cc] font-semibold px-3 py-1.5 rounded-full transition-colors flex items-center gap-1 cursor-pointer" onclick="loadSampleData()" type="button">
+<span class="material-symbols-outlined text-sm">add</span>
+          Inserir exemplo
+        </button>
+</div>
+</div>
+<!-- Modal Content: Users Table / Cards -->
+<div class="p-6 overflow-y-auto flex-1 space-y-3" id="database-records-container">
+<!-- Records will be injected dynamically -->
+</div>
+<!-- Modal Footer -->
+<div class="px-6 py-3 bg-[#f2e4f3] border-t border-[#ecdeed] flex justify-end">
+<button class="bg-[#2a1f2b] hover:bg-black text-white text-xs font-bold py-2 px-6 rounded-full transition-all cursor-pointer" onclick="closeDatabaseModal()" type="button">
+        Fechar
+      </button>
+</div>
+</div>
+</div>
+<!-- END: Database Inspection Modal -->
+<!-- BEGIN: Database and Interaction JavaScript Logic -->
+<script data-purpose="db-engine">
+  // Shared global key across Cadastro and Login screens
+  const DB_KEY = 'casa_inteligente_users';
+  const DB_SYNC_EVENT = 'casa_inteligente_users_updated';
+
+  // Default seed users if localStorage is empty
+  const DEFAULT_SEED_USERS = [
+    {
+      nome: 'Maria da Silva',
+      email: 'exemplo@email.com',
+      senha: '123'
+    }
+  ];
+
+  // In-memory fallback if localStorage is disabled/restricted
+  let memoryDB = null;
+
+  // Initialize and retrieve the global users list
+  function getDB() {
+    try {
+      const stored = localStorage.getItem(DB_KEY);
+      if (stored !== null) {
+        const parsed = JSON.parse(stored);
+        if (Array.isArray(parsed)) {
+          if (parsed.length === 0) {
+            // Keep empty if explicitly cleared, or return empty array
+            return parsed;
+          }
+          return parsed;
+        }
+      }
+
+      // Check legacy migration if any
+      const legacyKey = localStorage.getItem('casa_inteligente_db_users') || localStorage.getItem('casa_inteligente_db');
+      if (legacyKey) {
+        const parsedLegacy = JSON.parse(legacyKey);
+        if (Array.isArray(parsedLegacy) && parsedLegacy.length > 0) {
+          saveDB(parsedLegacy);
+          return parsedLegacy;
+        }
+      }
+
+      // If empty/new initialization, populate with default user
+      const initialUsers = JSON.parse(JSON.stringify(DEFAULT_SEED_USERS));
+      saveDB(initialUsers);
+      return initialUsers;
+    } catch (e) {
+      console.warn('localStorage indisponível, utilizando memória local.', e);
+      if (!memoryDB) {
+        memoryDB = JSON.parse(JSON.stringify(DEFAULT_SEED_USERS));
+      }
+      return memoryDB;
+    }
+  }
+
+  function saveDB(records) {
+    try {
+      localStorage.setItem(DB_KEY, JSON.stringify(records));
+    } catch (e) {
+      console.warn('Falha ao gravar no localStorage, persistindo em memória.', e);
+      memoryDB = records;
+    }
+
+    // Emit custom event for immediate same-window synchronization
+    window.dispatchEvent(new CustomEvent(DB_SYNC_EVENT, { detail: { users: records } }));
+    updateUserBadge();
+  }
+
+  function updateUserBadge() {
+    const users = getDB();
+    const count = users.length;
+    const badge = document.getElementById('user-count-badge');
+    const label = document.getElementById('total-users-label');
+    if (badge) badge.innerText = count;
+    if (label) label.innerText = count;
+  }
+
+  // Mode toggling (Cadastro vs Login)
+  function toggleAuthMode(mode) {
+    const registerView = document.getElementById('view-register');
+    const loginView = document.getElementById('view-login');
+
+    // Clear validation error tags and borders
+    document.querySelectorAll('[id^="error-"]').forEach(el => {
+      el.classList.add('hidden');
+      el.innerHTML = '';
+    });
+    document.querySelectorAll('input').forEach(inp => {
+      inp.classList.remove('border-rose-400', 'bg-rose-50/20');
+      inp.classList.add('border-transparent');
+    });
+
+    // Clear status alerts
+    const regAlert = document.getElementById('register-status-alert');
+    const logAlert = document.getElementById('login-status-alert');
+    if (regAlert) {
+      regAlert.className = 'hidden mb-4 p-3 rounded-2xl text-xs font-sans-data font-semibold text-center transition-all duration-200';
+      regAlert.innerText = '';
+    }
+    if (logAlert) {
+      logAlert.className = 'hidden mb-4 p-3 rounded-2xl text-xs font-sans-data font-semibold text-center transition-all duration-200';
+      logAlert.innerText = '';
+    }
+
+    if (mode === 'login') {
+      registerView.classList.add('hidden');
+      loginView.classList.remove('hidden');
+    } else {
+      loginView.classList.add('hidden');
+      registerView.classList.remove('hidden');
+    }
+  }
+
+  // Toast Notification System
+  let toastTimeout = null;
+  function showToast(message, type = 'success') {
+    const container = document.getElementById('toast-container');
+    const toastBox = document.getElementById('toast-box');
+    const toastIcon = document.getElementById('toast-icon');
+    const toastMsg = document.getElementById('toast-message');
+
+    if (!container || !toastBox) return;
+
+    clearTimeout(toastTimeout);
+
+    if (type === 'success') {
+      toastBox.className = 'flex items-center gap-3 px-6 py-3.5 rounded-full shadow-2xl text-white text-sm font-semibold tracking-wide border border-emerald-300/30 backdrop-blur-md bg-emerald-700/95';
+      toastIcon.innerText = 'check_circle';
+    } else if (type === 'error') {
+      toastBox.className = 'flex items-center gap-3 px-6 py-3.5 rounded-full shadow-2xl text-white text-sm font-semibold tracking-wide border border-rose-300/30 backdrop-blur-md bg-rose-700/95';
+      toastIcon.innerText = 'error';
+    } else {
+      toastBox.className = 'flex items-center gap-3 px-6 py-3.5 rounded-full shadow-2xl text-white text-sm font-semibold tracking-wide border border-white/20 backdrop-blur-md bg-[#553457]/95';
+      toastIcon.innerText = 'info';
+    }
+
+    toastMsg.innerText = message;
+
+    container.classList.remove('opacity-0', 'invisible');
+    container.classList.add('opacity-100', 'toast-animate-in');
+
+    toastTimeout = setTimeout(() => {
+      container.classList.add('opacity-0');
+      container.classList.remove('opacity-100', 'toast-animate-in');
+      setTimeout(() => {
+        container.classList.add('invisible');
+      }, 300);
+    }, 4000);
+  }
+
+  function setFieldError(inputId, errorId, message) {
+    const input = document.getElementById(inputId);
+    const errorEl = document.getElementById(errorId);
+    if (input) {
+      input.classList.remove('border-transparent');
+      input.classList.add('border-rose-400');
+    }
+    if (errorEl) {
+      errorEl.innerHTML = `<span class="material-symbols-outlined text-sm inline-block align-middle">error</span> ${escapeHtml(message)}`;
+      errorEl.classList.remove('hidden');
+    }
+  }
+
+  function clearFieldError(inputId, errorId) {
+    const input = document.getElementById(inputId);
+    const errorEl = document.getElementById(errorId);
+    if (input) {
+      input.classList.remove('border-rose-400');
+      input.classList.add('border-transparent');
+    }
+    if (errorEl) {
+      errorEl.innerHTML = '';
+      errorEl.classList.add('hidden');
+    }
+  }
+
+  // ==========================================
+  // ACTION: Cadastrar / ENTRAR (Registration)
+  // ==========================================
+  function handleRegister(event) {
+    event.preventDefault();
+
+    const nameInput = document.getElementById('name');
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
+    const submitBtn = document.getElementById('btn-submit');
+    const alertBox = document.getElementById('register-status-alert');
+
+    // Reset previous errors and alerts
+    clearFieldError('name', 'error-name');
+    clearFieldError('email', 'error-email');
+    clearFieldError('password', 'error-password');
+
+    alertBox.className = 'hidden mb-4 p-3 rounded-2xl text-xs font-sans-data font-semibold text-center transition-all duration-200';
+    alertBox.innerText = '';
+
+    // Capture values & normalize
+    const name = nameInput.value.trim();
+    const email = emailInput.value.trim().toLowerCase();
+    const password = passwordInput.value;
+
+    let hasValidationError = false;
+
+    // 1. Validate Name
+    if (!name) {
+      setFieldError('name', 'error-name', 'Por favor, informe seu nome.');
+      hasValidationError = true;
+    } else if (name.length < 2) {
+      setFieldError('name', 'error-name', 'O nome deve ter no mínimo 2 caracteres.');
+      hasValidationError = true;
+    }
+
+    // 2. Validate Email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email) {
+      setFieldError('email', 'error-email', 'Por favor, informe seu e-mail.');
+      hasValidationError = true;
+    } else if (!emailRegex.test(email)) {
+      setFieldError('email', 'error-email', 'Formato de e-mail inválido (ex: nome@dominio.com).');
+      hasValidationError = true;
+    }
+
+    // 3. Validate Password
+    if (!password) {
+      setFieldError('password', 'error-password', 'Por favor, crie uma senha.');
+      hasValidationError = true;
+    } else if (password.length < 3) {
+      setFieldError('password', 'error-password', 'A senha precisa ter no mínimo 3 caracteres.');
+      hasValidationError = true;
+    }
+
+    if (hasValidationError) {
+      return;
+    }
+
+    // 4. Check if email already exists in localStorage ('casa_inteligente_users')
+    const users = getDB();
+    const emailAlreadyRegistered = users.some(u => {
+      const storedEmail = (u.email || '').trim().toLowerCase();
+      return storedEmail === email;
+    });
+
+    if (emailAlreadyRegistered) {
+      // Keep user on register view and show visible error under email field
+      const duplicateMsg = 'Este e-mail já está cadastrado.';
+      setFieldError('email', 'error-email', duplicateMsg);
+
+      // Display highlighted banner in the form
+      alertBox.className = 'mb-4 p-3 rounded-2xl text-xs font-sans-data font-semibold text-center transition-all duration-200 bg-rose-950/60 border border-rose-400 text-rose-200 block';
+      alertBox.innerHTML = `<span class="material-symbols-outlined text-sm align-middle mr-1">warning</span> ${duplicateMsg} Faça login ou use outro endereço.`;
+
+      showToast(duplicateMsg, 'error');
+      emailInput.focus();
+      return;
+    }
+
+    // 5. New user is permitted (names can repeat freely)
+    const newUser = {
+      nome: name,
+      email: email,
+      senha: password
+    };
+
+    users.push(newUser);
+    saveDB(users);
+
+    // 6. Display visual success feedback
+    const successMsg = 'Cadastro realizado com sucesso! Redirecionando...';
+    alertBox.className = 'mb-4 p-3 rounded-2xl text-xs font-sans-data font-semibold text-center transition-all duration-200 bg-emerald-950/60 border border-emerald-400 text-emerald-200 block';
+    alertBox.innerHTML = `<span class="material-symbols-outlined text-sm align-middle mr-1">check_circle</span> ${successMsg}`;
+
+    showToast(successMsg, 'success');
+
+    // Disable button during brief transition
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.classList.add('opacity-50');
+    }
+
+    // Pre-fill email in Login form
+    document.getElementById('login-email').value = email;
+    document.getElementById('login-password').value = '';
+
+    // Transition/Redirect to Login screen after 1.5s delay
+    setTimeout(() => {
+      document.getElementById('registration-form').reset();
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.classList.remove('opacity-50');
+      }
+      alertBox.className = 'hidden mb-4 p-3 rounded-2xl text-xs font-sans-data font-semibold text-center transition-all duration-200';
+      alertBox.innerText = '';
+      toggleAuthMode('login');
+
+      // Show notification on login screen
+      const loginAlert = document.getElementById('login-status-alert');
+      if (loginAlert) {
+        loginAlert.className = 'mb-4 p-3 rounded-2xl text-xs font-sans-data font-semibold text-center transition-all duration-200 bg-emerald-950/60 border border-emerald-400 text-emerald-200 block';
+        loginAlert.innerHTML = `<span class="material-symbols-outlined text-sm align-middle mr-1">badge</span> Conta criada para <strong>${escapeHtml(newUser.nome)}</strong>! Digite sua senha para acessar.`;
+      }
+    }, 1500);
+
+    // Refresh database modal inspection if active
+    renderDatabaseModal();
+  }
+
+  // ==========================================
+  // ACTION: Login Form Handler
+  // ==========================================
+  function handleLogin(event) {
+    event.preventDefault();
+
+    const emailInput = document.getElementById('login-email');
+    const passwordInput = document.getElementById('login-password');
+    const alertBox = document.getElementById('login-status-alert');
+
+    clearFieldError('login-email', 'error-login-email');
+    clearFieldError('login-password', 'error-login-password');
+
+    if (alertBox) {
+      alertBox.className = 'hidden mb-4 p-3 rounded-2xl text-xs font-sans-data font-semibold text-center transition-all duration-200';
+      alertBox.innerText = '';
+    }
+
+    const email = emailInput.value.trim().toLowerCase();
+    const password = passwordInput.value;
+
+    let hasError = false;
+
+    if (!email) {
+      setFieldError('login-email', 'error-login-email', 'Informe seu e-mail cadastrado.');
+      hasError = true;
+    }
+
+    if (!password) {
+      setFieldError('login-password', 'error-login-password', 'Informe sua senha.');
+      hasError = true;
+    }
+
+    if (hasError) {
+      showToast('Por favor, preencha todos os campos.', 'error');
+      return;
+    }
+
+    const users = getDB();
+    const user = users.find(u => (u.email || '').trim().toLowerCase() === email);
+
+    if (!user) {
+      const notFoundMsg = 'E-mail não cadastrado. Verifique ou crie uma conta.';
+      setFieldError('login-email', 'error-login-email', notFoundMsg);
+      showToast('Usuário não encontrado!', 'error');
+      return;
+    }
+
+    if (user.senha !== password) {
+      const passErrMsg = 'Senha incorreta. Tente novamente.';
+      setFieldError('login-password', 'error-login-password', passErrMsg);
+      showToast('Senha incorreta!', 'error');
+      return;
+    }
+
+    // Success login
+    showToast(`Bem-vindo(a), ${user.nome}! Login realizado com sucesso.`, 'success');
+    if (alertBox) {
+      alertBox.className = 'mb-4 p-3 rounded-2xl text-xs font-sans-data font-semibold text-center transition-all duration-200 bg-emerald-950/60 border border-emerald-400 text-emerald-200 block';
+      alertBox.innerHTML = `<span class="material-symbols-outlined text-sm align-middle mr-1">check_circle</span> Acesso autorizado para <strong>${escapeHtml(user.nome)}</strong>!`;
+    }
+  }
+
+  // Database Modal Functions
+  function openDatabaseModal() {
+    renderDatabaseModal();
+    const modal = document.getElementById('database-modal');
+    const panel = document.getElementById('modal-panel');
+    modal.classList.remove('opacity-0', 'pointer-events-none');
+    modal.classList.add('opacity-100');
+    panel.classList.remove('scale-95');
+    panel.classList.add('scale-100');
+  }
+
+  function closeDatabaseModal() {
+    const modal = document.getElementById('database-modal');
+    const panel = document.getElementById('modal-panel');
+    modal.classList.add('opacity-0', 'pointer-events-none');
+    modal.classList.remove('opacity-100');
+    panel.classList.add('scale-95');
+    panel.classList.remove('scale-100');
+  }
+
+  function renderDatabaseModal() {
+    const records = getDB();
+    const container = document.getElementById('database-records-container');
+    updateUserBadge();
+
+    if (!container) return;
+
+    if (records.length === 0) {
+      container.innerHTML = `
+        <div class="text-center py-10 text-gray-500">
+          <span class="material-symbols-outlined text-4xl mb-2 text-[#927e95]">inventory_2</span>
+          <p class="text-sm font-medium">Nenhum registro encontrado em '${DB_KEY}'.</p>
+          <p class="text-xs text-gray-400 mt-1">Preencha o formulário e cadastre-se para registrar.</p>
+        </div>
+      `;
+      return;
+    }
+
+    let html = '';
+    records.slice().reverse().forEach((user, idx) => {
+      const maskedPass = '•'.repeat(Math.min(user.senha ? user.senha.length : 6, 8));
+      html += `
+        <div class="bg-white p-4 rounded-2xl border border-[#ecdeed] hover:shadow-md transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-left">
+          <div class="space-y-1">
+            <div class="flex items-center gap-2">
+              <span class="font-bold text-[#2a1f2b] text-base">${escapeHtml(user.nome)}</span>
+              <span class="text-[10px] bg-[#f8e9f9] text-[#553457] font-mono px-2 py-0.5 rounded-full">reg #${records.length - idx}</span>
+            </div>
+            <div class="text-xs text-gray-600 flex items-center gap-1">
+              <span class="material-symbols-outlined text-sm text-[#705579]">mail</span>
+              <span class="font-mono">${escapeHtml(user.email)}</span>
+            </div>
+            <div class="text-xs text-gray-400 flex items-center gap-3">
+              <span class="flex items-center gap-1">
+                <span class="material-symbols-outlined text-xs">key</span>
+                <span class="font-mono tracking-wider font-semibold text-gray-700">${escapeHtml(user.senha || '')} (${maskedPass})</span>
+              </span>
+            </div>
+          </div>
+          <div class="flex items-center justify-end gap-2">
+            <button type="button" onclick="prefillLogin('${escapeHtml(user.email)}', '${escapeHtml(user.senha)}')" title="Usar para login" class="text-xs text-[#553457] hover:text-white bg-[#f8e9f9] hover:bg-[#553457] font-semibold px-3 py-1.5 rounded-xl transition-colors flex items-center gap-1 cursor-pointer">
+              <span class="material-symbols-outlined text-sm">login</span>
+              Testar Login
+            </button>
+            <button type="button" onclick="deleteUser('${escapeHtml(user.email)}')" title="Excluir este registro" class="text-xs text-rose-600 hover:text-rose-800 bg-rose-50 hover:bg-rose-100 p-2 rounded-xl transition-colors flex items-center gap-1 cursor-pointer">
+              <span class="material-symbols-outlined text-base">delete</span>
+            </button>
+          </div>
+        </div>
+      `;
+    });
+
+    container.innerHTML = html;
+  }
+
+  function prefillLogin(email, senha) {
+    closeDatabaseModal();
+    toggleAuthMode('login');
+    document.getElementById('login-email').value = email;
+    document.getElementById('login-password').value = senha;
+    showToast('Dados preenchidos no formulário de login.', 'info');
+  }
+
+  function deleteUser(email) {
+    if (confirm(`Deseja remover o usuário com e-mail ${email}?`)) {
+      let records = getDB();
+      records = records.filter(u => (u.email || '').trim().toLowerCase() !== email.trim().toLowerCase());
+      saveDB(records);
+      renderDatabaseModal();
+      showToast('Registro excluído com sucesso!', 'info');
+    }
+  }
+
+  function clearDatabase() {
+    if (confirm('Tem certeza de que deseja limpar todos os usuários cadastrados?')) {
+      saveDB([]);
+      renderDatabaseModal();
+      showToast('Banco de dados esvaziado!', 'info');
+    }
+  }
+
+  function loadSampleData() {
+    const samples = [
+      { nome: 'Maria da Silva', email: 'exemplo@email.com', senha: '123' },
+      { nome: 'Carlos Eduardo', email: 'carlos.edu@exemplo.com', senha: '456' },
+      { nome: 'Maria da Silva', email: 'maria.silva2@exemplo.com', senha: '789' }
+    ];
+    const records = getDB();
+    samples.forEach(s => {
+      const emailLower = s.email.trim().toLowerCase();
+      if (!records.some(r => (r.email || '').trim().toLowerCase() === emailLower)) {
+        records.push({
+          nome: s.nome,
+          email: emailLower,
+          senha: s.senha
+        });
+      }
+    });
+    saveDB(records);
+    renderDatabaseModal();
+    showToast('Exemplos sincronizados com sucesso!', 'success');
+  }
+
+  function escapeHtml(string) {
+    return String(string)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
+
+  // Keyboard navigation & modal closing
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeDatabaseModal();
+  });
+  document.getElementById('database-modal').addEventListener('click', (e) => {
+    if (e.target === document.getElementById('database-modal')) {
+      closeDatabaseModal();
+    }
+  });
+
+  // Real-time synchronization handlers (across tabs and internal windows)
+  window.addEventListener('storage', (e) => {
+    if (e.key === DB_KEY) {
+      updateUserBadge();
+      const modal = document.getElementById('database-modal');
+      if (modal && !modal.classList.contains('pointer-events-none')) {
+        renderDatabaseModal();
+      }
+    }
+  });
+
+  window.addEventListener(DB_SYNC_EVENT, () => {
+    updateUserBadge();
+    const modal = document.getElementById('database-modal');
+    if (modal && !modal.classList.contains('pointer-events-none')) {
+      renderDatabaseModal();
+    }
+  });
+
+  // Initialize DB and badge on boot
+  window.addEventListener('DOMContentLoaded', () => {
+    getDB();
+    updateUserBadge();
+  });
+</script>
+<!-- END: Database and Interaction JavaScript Logic -->
+</body></html>
